@@ -1,7 +1,12 @@
 .logo {
   width: 142px;
   height: 33px;
-  background-image: url(./../../images/logo.svg);
+  background-image: url(./../../images/logo-white.svg);
   background-size: cover;
   background-repeat: no-repeat;
+  transition: background-image 4s ease;
+}
+
+.logo:hover {
+  background-image: url(./../../images/logo-black.svg);
 }
