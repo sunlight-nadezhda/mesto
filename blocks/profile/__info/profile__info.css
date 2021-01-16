@@ -1,0 +1,11 @@
+.profile__info {
+  margin-left: 30px;
+  margin-right: auto;
+  display: grid;
+  gap: 16px 18px;
+  grid-template-columns: 1fr 24px;
+  grid-template-areas:
+  'name button'
+  'metier metier';
+  align-items: baseline;
+}

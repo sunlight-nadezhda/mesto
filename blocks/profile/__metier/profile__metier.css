@@ -1,7 +1,7 @@
-.footer {
-  padding-top: 66px;
-  color: #545454;
+.profile__metier {
+  margin: 0;
   font-weight: normal;
   font-size: 18px;
   line-height: calc(22 / 18);
+  grid-area: metier;
 }
