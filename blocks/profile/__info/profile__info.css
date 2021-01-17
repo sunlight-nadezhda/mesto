@@ -9,3 +9,10 @@
   'metier metier';
   align-items: baseline;
 }
+
+@media (max-width: 760px) {
+  .profile__info {
+    margin-left: auto;
+    margin-top: 26px;
+  }
+}

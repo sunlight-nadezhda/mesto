@@ -10,3 +10,10 @@
 .logo:hover {
   background-image: url(./../../images/logo-black.svg);
 }
+
+@media (max-width: 760px) {
+  .logo {
+    width: 104px;
+    height: 24px;
+  }
+}

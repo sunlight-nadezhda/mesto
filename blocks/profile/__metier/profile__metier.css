@@ -5,3 +5,11 @@
   line-height: calc(22 / 18);
   grid-area: metier;
 }
+
+@media (max-width: 760px) {
+  .profile__metier {
+    font-size: 14px;
+    line-height: calc(17 / 14);
+    text-align: center;
+  }
+}

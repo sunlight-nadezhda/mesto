@@ -14,3 +14,17 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 }
+
+@media (max-width: 1020px) {
+  .page {
+    max-width: calc(880 / 1020 * 100%);
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    max-width: 100%;
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+}
