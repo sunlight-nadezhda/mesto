@@ -1,0 +1,8 @@
+.element__info {
+  width: calc(246 / 282 * 100%);
+  margin: 0 auto;
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
