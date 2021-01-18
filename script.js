@@ -30,14 +30,7 @@ function handleFormSubmit (evt) {
   profileName.textContent = nameInput;
   profileMetier.textContent = jobInput;
 
-  console.log(nameInput);
-  console.log(jobInput);
-
-  // Выберите элементы, куда должны быть вставлены значения полей
-
-  // Вставьте новые значения с помощью textContent
+  hidePopup();
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
