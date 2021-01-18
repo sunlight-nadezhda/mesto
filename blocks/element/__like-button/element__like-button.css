@@ -1,12 +1,13 @@
-.element__like {
+.element__like-button {
   width: 22px;
   height: 19px;
+  background-image: url(./../../../images/like-disabled.svg);
   background-repeat: no-repeat;
   background-size: cover;
   transition: opacity .5s ease-in;
 }
 
-.element__like:hover {
+.element__like-button:hover {
   opacity: .5;
   cursor: pointer;
 }

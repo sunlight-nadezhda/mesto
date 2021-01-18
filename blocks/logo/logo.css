@@ -6,7 +6,7 @@
   background-image: url(./../../images/logo-white.svg);
   background-size: cover;
   background-repeat: no-repeat;
-  transition: background-image 4s ease;
+  transition: background-image 4s linear;
 }
 
 .logo:hover {
