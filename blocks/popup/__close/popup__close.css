@@ -8,3 +8,11 @@
   right: -35px;
   top: -35px;
 }
+
+@media (max-width: 760px) {
+  .popup__close {
+    width: 26px;
+    height: 26px;
+    right: calc(19px + 10px - 26px);
+  }
+}
