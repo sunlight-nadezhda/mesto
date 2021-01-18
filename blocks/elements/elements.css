@@ -1,4 +1,7 @@
 .elements {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   padding-top: 50px;
   display: grid;
   gap: 20px 17px;
