@@ -10,6 +10,12 @@
   font-size: 18px;
   line-height: calc(22 / 18);
   text-align: center;
+  transition: opacity .5s ease-out;
+}
+
+.popup__save-button:hover {
+  opacity: .8;
+  cursor: pointer;
 }
 
 @media (max-width: 760px) {

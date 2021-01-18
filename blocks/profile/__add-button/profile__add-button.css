@@ -5,6 +5,12 @@
   background-size: 22px;
   border: 2px solid #fff;
   border-radius: 2px;
+  transition: opacity .5s ease-in-out;
+}
+
+.profile__add-button:hover {
+  opacity: .6;
+  cursor: pointer;
 }
 
 @media (max-width: 760px) {

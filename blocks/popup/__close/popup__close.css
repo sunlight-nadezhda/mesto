@@ -7,6 +7,12 @@
   position: absolute;
   right: -35px;
   top: -35px;
+  transition: opacity .5s ease-out;
+}
+
+.popup__close:hover {
+  opacity: .6;
+  cursor: pointer;
 }
 
 @media (max-width: 760px) {

@@ -6,6 +6,12 @@
   grid-area: button;
   background-size: 10px;
   border: 1px solid #fff;
+  transition: opacity .5s ease-in-out;
+}
+
+.profile__edit-button:hover {
+  opacity: .6;
+  cursor: pointer;
 }
 
 @media (max-width: 760px) {

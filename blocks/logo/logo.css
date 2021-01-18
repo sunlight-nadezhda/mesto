@@ -9,6 +9,7 @@
 
 .logo:hover {
   background-image: url(./../../images/logo-black.svg);
+  cursor: pointer;
 }
 
 @media (max-width: 760px) {
