@@ -5,12 +5,10 @@ let profileMetier = profile.querySelector('.profile__metier');
 let popup = document.querySelector('.popup');
 let popupClose = popup.querySelector('.popup__close');
 let popupInputText = popup.querySelectorAll('.popup__input-text');
+let formElement = popup.querySelector('.popup__container');
 
 function showPopup() {
   popup.classList.add('popup_opened');
-  // console.log(popupInputText);
-  // console.log(profileName.textContent);
-  // console.log(profileMetier.textContent);
   popupInputText[0].value = profileName.textContent;
   popupInputText[1].value = profileMetier.textContent;
 }
@@ -22,3 +20,24 @@ function hidePopup() {
 }
 
 popupClose.addEventListener('click', hidePopup);
+
+function handleFormSubmit (evt) {
+  evt.preventDefault();
+
+  let nameInput = formElement.querySelector('.popup__input-text_type_name').value;
+  let jobInput = formElement.querySelector('.popup__input-text_type_metier').value;
+
+  profileName.textContent = nameInput;
+  profileMetier.textContent = jobInput;
+
+  console.log(nameInput);
+  console.log(jobInput);
+
+  // Выберите элементы, куда должны быть вставлены значения полей
+
+  // Вставьте новые значения с помощью textContent
+}
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', handleFormSubmit);
