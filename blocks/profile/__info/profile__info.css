@@ -13,3 +13,9 @@
     max-width: calc(100% - 2 * 19px);
   }
 }
+
+@media (max-width: 400px) {
+  .profile__info {
+    margin-left: calc(65 / 320 * 100%);
+  }
+}
