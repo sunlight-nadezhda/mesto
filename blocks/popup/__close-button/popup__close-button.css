@@ -16,9 +16,10 @@
 }
 
 @media (max-width: 760px) {
-  .popup__close {
-    width: 26px;
-    height: 26px;
-    right: calc(19px + 10px - 26px);
+  .popup__close-button {
+    width: 40px;
+    height: 40px;
+    right: -2px;
+    top: -53px;
   }
 }

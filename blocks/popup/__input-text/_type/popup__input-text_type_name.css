@@ -1,3 +1,9 @@
 .popup__input-text_type_name {
   padding-top: 43px;
 }
+
+@media (max-width: 760px) {
+  .popup__input-text_type_name {
+    padding-top: 67px;
+  }
+}
