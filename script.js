@@ -2,8 +2,9 @@ let profile = document.querySelector('.profile');
 let editButton = profile.querySelector('.profile__edit-button');
 let profileName = profile.querySelector('.profile__name');
 let profileMetier = profile.querySelector('.profile__metier');
+
 let popup = document.querySelector('.popup');
-let popupClose = popup.querySelector('.popup__close');
+let popupClose = popup.querySelector('.popup__close-button');
 let formElement = popup.querySelector('.popup__container');
 let nameInput = formElement.querySelector('.popup__input-text_type_name');
 let jobInput = formElement.querySelector('.popup__input-text_type_metier');
