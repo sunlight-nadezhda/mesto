@@ -1,4 +1,11 @@
 .profile__about {
   display: flex;
   flex-direction: column;
+  width: 90%;
+}
+
+@media (max-width: 760px) {
+  .profile__about {
+    width: 100%;
+  }
 }

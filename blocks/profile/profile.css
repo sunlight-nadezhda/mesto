@@ -6,7 +6,7 @@
   color: #fff;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1020px) {
   .profile {
     padding-top: 42px;
     flex-direction: column;

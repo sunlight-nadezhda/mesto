@@ -3,11 +3,13 @@
   margin-right: auto;
   display: flex;
   align-items: baseline;
+  max-width: 65%;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1020px) {
   .profile__info {
     margin-left: auto;
     margin-top: 26px;
+    max-width: calc(100% - 2 * 19px);
   }
 }
