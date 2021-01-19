@@ -10,11 +10,20 @@
 
 @media (max-width: 1020px) {
   .elements {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, fit-content(282px));
+    max-width: calc(2 * 282px + 17px);
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 760px) {
+  .elements {
+    max-width: 282px;
+    grid-template-columns: repeat(1, minmax(calc(282 / 880 * 100%), 282px));
+  }
+}
+
+@media (max-width: 400px) {
   .elements {
     padding: 0 19px;
     grid-template-columns: repeat(1, 1fr);
