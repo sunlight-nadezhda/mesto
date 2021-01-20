@@ -6,6 +6,6 @@
 
 @media (max-width: 760px) {
   .profile__about {
-    width: 100%;
+    width: calc(100% - (10px + 18px));
   }
 }
