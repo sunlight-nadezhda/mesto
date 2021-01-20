@@ -6,5 +6,16 @@
   min-height: 27px;
   font-size: 14px;
   line-height: calc(17 / 14);
+  padding-top: 25px;
   padding-bottom: 5px;
+}
+
+.popup__input-text:first-of-type {
+  padding-top: 43px;
+}
+
+@media (max-width: 760px) {
+  .popup__input-text:first-of-type {
+    padding-top: 67px;
+  }
 }
