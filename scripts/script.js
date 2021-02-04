@@ -36,24 +36,24 @@ const initialCards = [
   }
 ];
 
-const togglePopup = (event) => {
+const togglePopup = event => {
   event.preventDefault();
   popup.classList.toggle('popup_opened');
 }
 
-function showPopup(event) {
+const showPopup = event => {
   togglePopup(event);
   nameInput.value = profileName.textContent;
   jobInput.value = profileMetier.textContent;
 }
 
-const closePopup = function(event) {
+const closePopup = event => {
   if (event.target === event.currentTarget) {
     togglePopup(event);
   }
 };
 
-function handleFormSubmit(event) {
+const handleFormSubmit = event => {
   profileName.textContent = nameInput.value;
   profileMetier.textContent = jobInput.value;
   togglePopup(event);
