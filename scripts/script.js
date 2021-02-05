@@ -1,14 +1,3 @@
-const profile = document.querySelector('.profile');
-const editButton = profile.querySelector('.profile__edit-button');
-const profileName = profile.querySelector('.profile__name');
-const profileMetier = profile.querySelector('.profile__metier');
-
-const popup = document.querySelector('.popup');
-const popupClose = popup.querySelector('.popup__close-button');
-const formElement = popup.querySelector('.popup__container');
-const nameInput = formElement.querySelector('.popup__input-text_type_name');
-const jobInput = formElement.querySelector('.popup__input-text_type_metier');
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -39,6 +28,23 @@ const initialCards = [
 const elementsList = document.querySelector('.elements');
 const elementTemplate = document.querySelector('#element').content;
 
+const profile = document.querySelector('.profile');
+const buttonEditProfile = profile.querySelector('.profile__edit-button');
+const profileName = profile.querySelector('.profile__name');
+const profileMetier = profile.querySelector('.profile__metier');
+
+const popup = document.querySelectorAll('.popup');
+const popupProfile = document.querySelector('.popup_type_profile');
+const popupProfileClose = popupProfile.querySelector('.popup__close-button');
+const formProfileElement = popupProfile.querySelector('.popup__container');
+const nameProfileInput = formProfileElement.querySelector('.popup__input-text_type_name');
+const jobInput = formProfileElement.querySelector('.popup__input-text_type_metier');
+
+const buttonAddCard = profile.querySelector('.profile__add-button');
+
+const popupAddCard = document.querySelector('.popup_type_add-place');
+const popupAddCardClose = popupAddCard.querySelector('.popup__close-button');
+
 const addElementCard = (item) => {
   const elementListItem = elementTemplate.querySelector('.element').cloneNode(true);
 
@@ -54,14 +60,24 @@ const renderElements = objectsArray => {
   elementsList.append(...htmlList);
 };
 
-const togglePopup = event => {
+const choosePopup = event => {
+  const eventTarget = event.target;
+  if (eventTarget.closest('.popup_type_profile') || eventTarget.classList.contains('profile__edit-button')) {
+    return popupProfile;
+  }
+  if (eventTarget.closest('.popup_type_add-place') || eventTarget.classList.contains('profile__add-button')) {
+    return popupAddCard;
+  }
+}
+
+const togglePopup = (event) => {
   event.preventDefault();
-  popup.classList.toggle('popup_opened');
+  choosePopup(event).classList.toggle('popup_opened');
 };
 
-const showPopup = event => {
+const showPopupProfile = event => {
   togglePopup(event);
-  nameInput.value = profileName.textContent;
+  nameProfileInput.value = profileName.textContent;
   jobInput.value = profileMetier.textContent;
 };
 
@@ -72,14 +88,21 @@ const closePopup = event => {
 };
 
 const handleFormSubmit = event => {
-  profileName.textContent = nameInput.value;
+  profileName.textContent = nameProfileInput.value;
   profileMetier.textContent = jobInput.value;
   togglePopup(event);
 };
 
-editButton.addEventListener('click', showPopup);
-popupClose.addEventListener('click', togglePopup);
-formElement.addEventListener('submit', handleFormSubmit);
-popup.addEventListener('click', closePopup);
+const showPopupAddPlace = event => {
+  togglePopup(event);
+};
 
+buttonEditProfile.addEventListener('click', showPopupProfile);
+popupProfileClose.addEventListener('click', togglePopup);
+formProfileElement.addEventListener('submit', handleFormSubmit);
+
+buttonAddCard.addEventListener('click', showPopupAddPlace);
+popupAddCardClose.addEventListener('click', togglePopup);
+
+popup.forEach(item => item.addEventListener('click', closePopup));
 renderElements(initialCards);
