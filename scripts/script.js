@@ -2,7 +2,6 @@ const profile = document.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
 const profileName = profile.querySelector('.profile__name');
 const profileMetier = profile.querySelector('.profile__metier');
-const elementsList = document.querySelector('.elements');
 
 const popup = document.querySelector('.popup');
 const popupClose = popup.querySelector('.popup__close-button');
@@ -37,18 +36,23 @@ const initialCards = [
   }
 ];
 
-const addElementCard = (nameValue, linkValue) => {
-  const elementTemplate = document.querySelector('#element').content;
+const elementsList = document.querySelector('.elements');
+const elementTemplate = document.querySelector('#element').content;
+
+const addElementCard = (item) => {
   const elementListItem = elementTemplate.querySelector('.element').cloneNode(true);
 
-  elementListItem.querySelector('.element__image').setAttribute('src', linkValue);
-  elementListItem.querySelector('.element__image').setAttribute('alt', nameValue);
-  elementListItem.querySelector('.element__title').textContent = nameValue;
+  elementListItem.querySelector('.element__image').src = item.link;
+  elementListItem.querySelector('.element__image').alt = item.name;
+  elementListItem.querySelector('.element__title').textContent = item.name;
 
-  elementsList.append(elementListItem);
+  return elementListItem;
 };
 
-addElementCard('Архыз', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg');
+const renderElements = objectsArray => {
+  const htmlList = objectsArray.map(addElementCard);
+  elementsList.append(...htmlList);
+};
 
 const togglePopup = event => {
   event.preventDefault();
@@ -77,3 +81,5 @@ editButton.addEventListener('click', showPopup);
 popupClose.addEventListener('click', togglePopup);
 formElement.addEventListener('submit', handleFormSubmit);
 popup.addEventListener('click', closePopup);
+
+renderElements(initialCards);
