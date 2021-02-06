@@ -55,6 +55,9 @@ const addElementCard = (item) => {
   elementListItem.querySelector('.element__image').alt = item.name;
   elementListItem.querySelector('.element__title').textContent = item.name;
 
+  const elementLikeButton = elementListItem.querySelector('.element__like-button');
+  elementLikeButton.addEventListener('click', changeLikebutton);
+
   return elementListItem;
 };
 
@@ -112,6 +115,10 @@ const handleAddCard = event => {
   linkAddCardInput.value = '';
   togglePopup(event);
 };
+
+const changeLikebutton = event => {
+  event.target.classList.toggle('element__like-button_active');
+}
 
 buttonEditProfile.addEventListener('click', showPopupProfile);
 popupProfileClose.addEventListener('click', togglePopup);
