@@ -56,7 +56,10 @@ const addElementCard = (item) => {
   elementListItem.querySelector('.element__title').textContent = item.name;
 
   const elementLikeButton = elementListItem.querySelector('.element__like-button');
-  elementLikeButton.addEventListener('click', changeLikebutton);
+  elementLikeButton.addEventListener('click', handleChangeLike);
+
+  const elementTrashButton = elementListItem.querySelector('.element__trash');
+  elementTrashButton.addEventListener('click', handleDeleteCard);
 
   return elementListItem;
 };
@@ -76,31 +79,31 @@ const choosePopup = event => {
   }
 }
 
-const togglePopup = (event) => {
+const handleTogglePopup = (event) => {
   event.preventDefault();
   choosePopup(event).classList.toggle('popup_opened');
 };
 
-const showPopupProfile = event => {
-  togglePopup(event);
+const handleShowPopupProfile = event => {
+  handleTogglePopup(event);
   nameProfileInput.value = profileName.textContent;
   jobProfileInput.value = profileMetier.textContent;
 };
 
-const closePopup = event => {
+const handleClosePopup = event => {
   if (event.target === event.currentTarget) {
-    togglePopup(event);
+    handleTogglePopup(event);
   }
 };
 
 const handleFormProfileSubmit = event => {
   profileName.textContent = nameProfileInput.value;
   profileMetier.textContent = jobProfileInput.value;
-  togglePopup(event);
+  handleTogglePopup(event);
 };
 
-const showPopupAddPlace = event => {
-  togglePopup(event);
+const handleShowPopupAddCard = event => {
+  handleTogglePopup(event);
 };
 
 const handleAddCard = event => {
@@ -113,20 +116,24 @@ const handleAddCard = event => {
   elementsList.prepend(elementListItem);
   nameAddCardInput.value = '';
   linkAddCardInput.value = '';
-  togglePopup(event);
+  handleTogglePopup(event);
 };
 
-const changeLikebutton = event => {
+const handleChangeLike = event => {
   event.target.classList.toggle('element__like-button_active');
 }
 
-buttonEditProfile.addEventListener('click', showPopupProfile);
-popupProfileClose.addEventListener('click', togglePopup);
+const handleDeleteCard = event => {
+  event.target.closest('.element').remove();
+}
+
+buttonEditProfile.addEventListener('click', handleShowPopupProfile);
+popupProfileClose.addEventListener('click', handleTogglePopup);
 formProfileElement.addEventListener('submit', handleFormProfileSubmit);
 
-buttonAddCard.addEventListener('click', showPopupAddPlace);
-popupAddCardClose.addEventListener('click', togglePopup);
+buttonAddCard.addEventListener('click', handleShowPopupAddCard);
+popupAddCardClose.addEventListener('click', handleTogglePopup);
 formAddCardElement.addEventListener('submit', handleAddCard);
 
-popup.forEach(item => item.addEventListener('click', closePopup));
+popup.forEach(item => item.addEventListener('click', handleClosePopup));
 renderElements(initialCards);
