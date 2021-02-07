@@ -48,6 +48,11 @@ const formAddCardElement = popupAddCard.querySelector('.popup__container');
 const nameAddCardInput = formAddCardElement.querySelector('.popup__input-text_type_name');
 const linkAddCardInput = formAddCardElement.querySelector('.popup__input-text_type_link');
 
+const popupShowImage = document.querySelector('.popup_type_show-image');
+const popupShowImageClose = popupShowImage.querySelector('.popup__close-button');
+const popupImageContainer = popupShowImage.querySelector('.popup__container_type_show-image');
+const figureTemplate = document.querySelector('#figure').content;
+
 const addElementCard = (item) => {
   const elementListItem = elementTemplate.querySelector('.element').cloneNode(true);
 
@@ -60,6 +65,9 @@ const addElementCard = (item) => {
 
   const elementTrashButton = elementListItem.querySelector('.element__trash');
   elementTrashButton.addEventListener('click', handleDeleteCard);
+
+  const elementImage = elementListItem.querySelector('.element__image');
+  elementImage.addEventListener('click', handleShowImage);
 
   return elementListItem;
 };
@@ -77,11 +85,22 @@ const choosePopup = event => {
   if (eventTarget.closest('.popup_type_add-card') || eventTarget.classList.contains('profile__add-button')) {
     return popupAddCard;
   }
+  if (eventTarget.closest('.popup_type_show-image') || eventTarget.classList.contains('element__image')) {
+    return popupShowImage;
+  }
 }
 
-const handleTogglePopup = (event) => {
+const deleteAddedFigure = event => {
+  const popup = event.target.closest('.popup_type_show-image');
+  if (popup) {
+    popup.querySelector('.figure').remove();
+  }
+}
+
+const handleTogglePopup = event => {
   event.preventDefault();
   choosePopup(event).classList.toggle('popup_opened');
+  deleteAddedFigure(event);
 };
 
 const handleShowPopupProfile = event => {
@@ -127,6 +146,31 @@ const handleDeleteCard = event => {
   event.target.closest('.element').remove();
 }
 
+const getDataImage = event => {
+  const eventTarget = event.target;
+  const imageName = eventTarget.alt;
+  const imageLink = eventTarget.src;
+  return {
+    name: imageName,
+    link: imageLink
+  };
+}
+
+const createFigure = obj => {
+  const figure = figureTemplate.querySelector('.figure').cloneNode(true);
+  figure.querySelector('.figure__image').alt = obj.name;
+  figure.querySelector('.figure__image').src = obj.link;
+  figure.querySelector('.figure__caption').textContent = obj.name;
+  return figure;
+}
+
+const handleShowImage = event => {
+  handleTogglePopup(event);
+  const dataImage = getDataImage(event);
+  const figure = createFigure(dataImage);
+  popupImageContainer.append(figure);
+}
+
 buttonEditProfile.addEventListener('click', handleShowPopupProfile);
 popupProfileClose.addEventListener('click', handleTogglePopup);
 formProfileElement.addEventListener('submit', handleFormProfileSubmit);
@@ -134,6 +178,8 @@ formProfileElement.addEventListener('submit', handleFormProfileSubmit);
 buttonAddCard.addEventListener('click', handleShowPopupAddCard);
 popupAddCardClose.addEventListener('click', handleTogglePopup);
 formAddCardElement.addEventListener('submit', handleAddCard);
+
+popupShowImageClose.addEventListener('click', handleTogglePopup);
 
 popup.forEach(item => item.addEventListener('click', handleClosePopup));
 renderElements(initialCards);

@@ -47,6 +47,13 @@
     </li>
   </template>
 
+  <template id="figure">
+    <figure class="figure">
+      <img class="figure__image">
+      <figcaption class="figure__caption"></figcaption>
+    </figure>
+  </template>
+
   <div class="popup popup_type_profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
@@ -68,6 +75,12 @@
         <input type="text" name="input-link" placeholder="Ссылка на картинку" class="popup__input-text popup__input-text_type_link">
         <button type="submit" class="popup__save-button">Создать</button>
       </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_show-image">
+    <div class="popup__container popup__container_type_show-image">
+      <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
     </div>
   </div>
 </body>
