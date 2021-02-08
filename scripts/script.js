@@ -99,7 +99,10 @@ const deleteAddedFigure = event => {
 
 const handleTogglePopup = event => {
   event.preventDefault();
-  choosePopup(event).classList.toggle('popup_opened');
+  const currentPopup = choosePopup(event);
+  currentPopup.classList.toggle('popup_opened');
+  const popupContainer = currentPopup.querySelector('.popup__container');
+  popupContainer.classList.toggle('popup__container_visible');
   deleteAddedFigure(event);
 };
 
