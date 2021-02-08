@@ -33,24 +33,24 @@ const buttonEditProfile = profile.querySelector('.profile__edit-button');
 const profileName = profile.querySelector('.profile__name');
 const profileMetier = profile.querySelector('.profile__metier');
 
-const popup = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
-const popupProfileClose = popupProfile.querySelector('.popup__close-button');
-const formProfileElement = popupProfile.querySelector('.popup__container');
-const nameProfileInput = formProfileElement.querySelector('.popup__input-text_type_name');
-const jobProfileInput = formProfileElement.querySelector('.popup__input-text_type_metier');
+const buttonClosePopupProfile = popupProfile.querySelector('.popup__close-button');
+const containerPopupProfile = popupProfile.querySelector('.popup__container');
+const nameProfileInput = containerPopupProfile.querySelector('.popup__input-text_type_name');
+const jobProfileInput = containerPopupProfile.querySelector('.popup__input-text_type_metier');
 
 const buttonAddCard = profile.querySelector('.profile__add-button');
 
 const popupAddCard = document.querySelector('.popup_type_add-card');
-const popupAddCardClose = popupAddCard.querySelector('.popup__close-button');
-const formAddCardElement = popupAddCard.querySelector('.popup__container');
-const nameAddCardInput = formAddCardElement.querySelector('.popup__input-text_type_name');
-const linkAddCardInput = formAddCardElement.querySelector('.popup__input-text_type_link');
+const buttomClosePopupAddCard = popupAddCard.querySelector('.popup__close-button');
+const containerPopupAddCard = popupAddCard.querySelector('.popup__container');
+const nameAddCardInput = containerPopupAddCard.querySelector('.popup__input-text_type_name');
+const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input-text_type_link');
 
 const popupShowImage = document.querySelector('.popup_type_show-image');
-const popupShowImageClose = popupShowImage.querySelector('.popup__close-button');
-const popupImageContainer = popupShowImage.querySelector('.popup__container_type_show-image');
+const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
+const containerPopupImage = popupShowImage.querySelector('.popup__container_type_show-image');
 const figureTemplate = document.querySelector('#figure').content;
 
 const addElementCard = (item) => {
@@ -118,15 +118,15 @@ const handleClosePopup = event => {
   }
 };
 
-const handleFormProfileSubmit = event => {
+const handleSubmitFormProfile = event => {
   profileName.textContent = nameProfileInput.value;
   profileMetier.textContent = jobProfileInput.value;
   handleTogglePopup(event);
 };
 
-const handleShowPopupAddCard = event => {
-  handleTogglePopup(event);
-};
+// const handleShowPopupAddCard = event => {
+//   handleTogglePopup(event);
+// };
 
 const handleAddCard = event => {
   const inputTextName = nameAddCardInput.value;
@@ -171,18 +171,19 @@ const handleShowImage = event => {
   handleTogglePopup(event);
   const dataImage = getDataImage(event);
   const figure = createFigure(dataImage);
-  popupImageContainer.append(figure);
+  containerPopupImage.append(figure);
 }
 
 buttonEditProfile.addEventListener('click', handleShowPopupProfile);
-popupProfileClose.addEventListener('click', handleTogglePopup);
-formProfileElement.addEventListener('submit', handleFormProfileSubmit);
+buttonClosePopupProfile.addEventListener('click', handleTogglePopup);
+containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
-buttonAddCard.addEventListener('click', handleShowPopupAddCard);
-popupAddCardClose.addEventListener('click', handleTogglePopup);
-formAddCardElement.addEventListener('submit', handleAddCard);
+// buttonAddCard.addEventListener('click', handleShowPopupAddCard);
+buttonAddCard.addEventListener('click', handleTogglePopup);
+buttomClosePopupAddCard.addEventListener('click', handleTogglePopup);
+containerPopupAddCard.addEventListener('submit', handleAddCard);
 
-popupShowImageClose.addEventListener('click', handleTogglePopup);
+buttonClosePopupShowImage.addEventListener('click', handleTogglePopup);
 
-popup.forEach(item => item.addEventListener('click', handleClosePopup));
+popups.forEach(item => item.addEventListener('click', handleClosePopup));
 renderElements(initialCards);
