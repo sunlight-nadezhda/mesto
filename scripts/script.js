@@ -41,7 +41,7 @@ const addElementCard = item => {
   const elementTrashButton = elementListItem.querySelector('.element__trash');
   elementTrashButton.addEventListener('click', handleDeleteCard);
 
-  elementImage.addEventListener('click', handleOpenPopupShowImage);
+  elementImage.addEventListener('click', () => handleOpenPopup(event, popupShowImage));
 
   return elementListItem;
 };
@@ -51,29 +51,39 @@ const renderElements = objectsArray => {
   elementsList.append(...htmlList);
 };
 
-const handleOpenPopupProfile = () => {
-  popupProfile.classList.add('popup_opened');
-  nameProfileInput.value = profileName.textContent;
-  jobProfileInput.value = profileMetier.textContent;
+const getDataImage = event => {
+  const eventTarget = event.target;
+  const imageName = eventTarget.alt;
+  const imageLink = eventTarget.src;
+  return {
+    name: imageName,
+    link: imageLink
+  };
 }
 
-const handleClosePopupProfile = () => {
-  popupProfile.classList.remove('popup_opened');
-};
+const handleOpenPopup = (event, popup) => {
+  popup.classList.add('popup_opened');
+  if (popup === popupProfile) {
+    nameProfileInput.value = profileName.textContent;
+    jobProfileInput.value = profileMetier.textContent;
+  }
+  if (popup === popupShowImage) {
+    item = getDataImage(event);
+    figureImagePopupImage.src = item.link;
+    figureImagePopupImage.alt = item.name;
+    figureCaptionPopupImage.textContent = item.name;
+  }
+}
+
+const handleClosePopup = popup => {
+  popup.classList.remove('popup_opened');
+}
 
 const handleSubmitFormProfile = event => {
   event.preventDefault();
   profileName.textContent = nameProfileInput.value;
   profileMetier.textContent = jobProfileInput.value;
-  handleClosePopupProfile();
-};
-
-const handleOpenPopupAddCard = () => {
-  popupAddCard.classList.add('popup_opened');
-}
-
-const handleClosePopupAddCard = () => {
-  popupAddCard.classList.remove('popup_opened');
+  handleClosePopup(popupProfile);
 };
 
 const handleSubmitFormAddCard = event => {
@@ -87,7 +97,7 @@ const handleSubmitFormAddCard = event => {
   elementsList.prepend(elementListItem);
   nameAddCardInput.value = '';
   linkAddCardInput.value = '';
-  handleClosePopupAddCard();
+  handleClosePopup(popupAddCard);
 };
 
 const handleChangeLike = event => {
@@ -98,35 +108,19 @@ const handleDeleteCard = event => {
   event.target.closest('.element').remove();
 }
 
-const handleOpenPopupShowImage = event => {
-  popupShowImage.classList.add('popup_opened');
-  const eventTarget = event.target;
-  const imageName = eventTarget.alt;
-  const imageLink = eventTarget.src;
-  figureImagePopupImage.src = imageLink;
-  figureImagePopupImage.alt = imageName;
-  figureCaptionPopupImage.textContent = imageName;
-}
-
-const handleClosePopupShowImage = () => {
-  popupShowImage.classList.remove('popup_opened');
-};
-
-const handleClosePopup = event => {
-  if (event.target === event.currentTarget) {
-    event.target.classList.remove('popup_opened');
-  }
-};
-
-buttonEditProfile.addEventListener('click', handleOpenPopupProfile);
-buttonClosePopupProfile.addEventListener('click', handleClosePopupProfile);
+buttonEditProfile.addEventListener('click', () => handleOpenPopup(event, popupProfile));
+buttonClosePopupProfile.addEventListener('click', () => handleClosePopup(popupProfile));
 containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
-buttonAddCard.addEventListener('click', handleOpenPopupAddCard);
-buttomClosePopupAddCard.addEventListener('click', handleClosePopupAddCard);
+buttonAddCard.addEventListener('click', () => handleOpenPopup(event, popupAddCard));
+buttomClosePopupAddCard.addEventListener('click', () => handleClosePopup(popupAddCard));
 containerPopupAddCard.addEventListener('submit', handleSubmitFormAddCard);
 
-buttonClosePopupShowImage.addEventListener('click', handleClosePopupShowImage);
+buttonClosePopupShowImage.addEventListener('click', () => handleClosePopup(popupShowImage));
 
-popups.forEach(item => item.addEventListener('click', handleClosePopup));
+popups.forEach(item => item.addEventListener('click', event => {
+  if (event.target === event.currentTarget) {
+    handleClosePopup(event.target);
+  }
+}));
 renderElements(initialCards);
