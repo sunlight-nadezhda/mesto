@@ -10,20 +10,22 @@ const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
 const buttonClosePopupProfile = popupProfile.querySelector('.popup__close-button');
 const containerPopupProfile = popupProfile.querySelector('.popup__container');
-const nameProfileInput = containerPopupProfile.querySelector('.popup__input-text_type_name');
-const jobProfileInput = containerPopupProfile.querySelector('.popup__input-text_type_metier');
+const nameProfileInput = containerPopupProfile.querySelector('.popup__input-text_type_name-profile');
+const jobProfileInput = containerPopupProfile.querySelector('.popup__input-text_type_metier-profile');
 
 const buttonAddCard = profile.querySelector('.profile__add-button');
 
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const buttomClosePopupAddCard = popupAddCard.querySelector('.popup__close-button');
 const containerPopupAddCard = popupAddCard.querySelector('.popup__container');
-const nameAddCardInput = containerPopupAddCard.querySelector('.popup__input-text_type_name');
-const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input-text_type_link');
+const nameAddCardInput = containerPopupAddCard.querySelector('.popup__input-text_type_name-card');
+const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input-text_type_link-card');
 
 const popupShowImage = document.querySelector('.popup_type_show-image');
 const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
 const containerPopupImage = popupShowImage.querySelector('.popup__container_type_show-image');
+const figureImagePopupImage = popupShowImage.querySelector('.figure__image');
+const figureCaptionPopupImage = popupShowImage.querySelector('.figure__caption');
 
 const addElementCard = item => {
   const elementListItem = elementTemplate.querySelector('.element').cloneNode(true);
@@ -39,7 +41,7 @@ const addElementCard = item => {
   const elementTrashButton = elementListItem.querySelector('.element__trash');
   elementTrashButton.addEventListener('click', handleDeleteCard);
 
-  elementImage.addEventListener('click', handleShowImage);
+  elementImage.addEventListener('click', handleOpenPopupShowImage);
 
   return elementListItem;
 };
@@ -49,66 +51,33 @@ const renderElements = objectsArray => {
   elementsList.append(...htmlList);
 };
 
-// const choosePopup = event => {
-//   const eventTarget = event.target;
-//   if (eventTarget.closest('.popup_type_profile') || eventTarget.classList.contains('profile__edit-button')) {
-//     return popupProfile;
-//   }
-//   if (eventTarget.closest('.popup_type_add-card') || eventTarget.classList.contains('profile__add-button')) {
-//     return popupAddCard;
-//   }
-//   if (eventTarget.closest('.popup_type_show-image') || eventTarget.classList.contains('element__image')) {
-//     return popupShowImage;
-//   }
-// }
-
-const deleteAddedFigure = event => {
-  const popup = event.target.closest('.popup_type_show-image');
-  if (popup) {
-    popup.querySelector('.figure').remove();
-  }
-}
-
-// const handleTogglePopup = event => {
-//   event.preventDefault();
-//   const currentPopup = choosePopup(event);
-//   currentPopup.classList.toggle('popup_opened');
-//   const popupContainer = currentPopup.querySelector('.popup__container');
-//   popupContainer.classList.toggle('popup__container_visible');
-//   deleteAddedFigure(event);
-// };
-
-const openPopup = popup => {
-  popup.classList.add('popup_opened');
-}
-
-const closePopup = popup => {
-  popup.classList.remove('popup_opened');
-}
-
-const handleShowPopupProfile = event => {
-  handleTogglePopup(event);
+const handleOpenPopupProfile = () => {
+  popupProfile.classList.add('popup_opened');
   nameProfileInput.value = profileName.textContent;
   jobProfileInput.value = profileMetier.textContent;
-};
+}
 
-const handleClosePopup = event => {
-  if (event.target === event.currentTarget) {
-    handleTogglePopup(event);
-  }
+const handleClosePopupProfile = () => {
+  popupProfile.classList.remove('popup_opened');
 };
 
 const handleSubmitFormProfile = event => {
+  event.preventDefault();
   profileName.textContent = nameProfileInput.value;
   profileMetier.textContent = jobProfileInput.value;
-  handleTogglePopup(event);
+  handleClosePopupProfile();
 };
 
-// const handleShowPopupAddCard = event => {
-//   handleTogglePopup(event);
-// };
+const handleOpenPopupAddCard = () => {
+  popupAddCard.classList.add('popup_opened');
+}
 
-const handleAddCard = event => {
+const handleClosePopupAddCard = () => {
+  popupAddCard.classList.remove('popup_opened');
+};
+
+const handleSubmitFormAddCard = event => {
+  event.preventDefault();
   const inputTextName = nameAddCardInput.value;
   const inputTextLink = linkAddCardInput.value;
   const elementListItem = addElementCard({
@@ -118,7 +87,7 @@ const handleAddCard = event => {
   elementsList.prepend(elementListItem);
   nameAddCardInput.value = '';
   linkAddCardInput.value = '';
-  handleTogglePopup(event);
+  handleClosePopupAddCard();
 };
 
 const handleChangeLike = event => {
@@ -129,40 +98,35 @@ const handleDeleteCard = event => {
   event.target.closest('.element').remove();
 }
 
-const getDataImage = event => {
+const handleOpenPopupShowImage = event => {
+  popupShowImage.classList.add('popup_opened');
   const eventTarget = event.target;
   const imageName = eventTarget.alt;
   const imageLink = eventTarget.src;
-  return {
-    name: imageName,
-    link: imageLink
-  };
+  figureImagePopupImage.src = imageLink;
+  figureImagePopupImage.alt = imageName;
+  figureCaptionPopupImage.textContent = imageName;
 }
 
-const createFigure = obj => {
-  const figure = figureTemplate.querySelector('.figure').cloneNode(true);
-  figure.querySelector('.figure__image').alt = obj.name;
-  figure.querySelector('.figure__image').src = obj.link;
-  figure.querySelector('.figure__caption').textContent = obj.name;
-  return figure;
-}
+const handleClosePopupShowImage = () => {
+  popupShowImage.classList.remove('popup_opened');
+};
 
-const handleShowImage = event => {
-  handleTogglePopup(event);
-  const dataImage = getDataImage(event);
-  const figure = createFigure(dataImage);
-  containerPopupImage.append(figure);
-}
+const handleClosePopup = event => {
+  if (event.target === event.currentTarget) {
+    event.target.classList.remove('popup_opened');
+  }
+};
 
-buttonEditProfile.addEventListener('click', openPopup, popupProfile);
-buttonClosePopupProfile.addEventListener('click', closePopup, popupProfile);
+buttonEditProfile.addEventListener('click', handleOpenPopupProfile);
+buttonClosePopupProfile.addEventListener('click', handleClosePopupProfile);
 containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
-buttonAddCard.addEventListener('click', openPopup, popupAddCard);
-buttomClosePopupAddCard.addEventListener('click', closePopup, popupAddCard);
-containerPopupAddCard.addEventListener('submit', handleAddCard);
+buttonAddCard.addEventListener('click', handleOpenPopupAddCard);
+buttomClosePopupAddCard.addEventListener('click', handleClosePopupAddCard);
+containerPopupAddCard.addEventListener('submit', handleSubmitFormAddCard);
 
-buttonClosePopupShowImage.addEventListener('click', closePopup, popupShowImage);
+buttonClosePopupShowImage.addEventListener('click', handleClosePopupShowImage);
 
 popups.forEach(item => item.addEventListener('click', handleClosePopup));
 renderElements(initialCards);
