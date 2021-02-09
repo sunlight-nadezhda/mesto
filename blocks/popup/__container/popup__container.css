@@ -7,9 +7,6 @@
   position: relative;
   padding: 32px 36px 15px;
   box-sizing: border-box;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 1s linear;
 }
 
 @media (max-width: 760px) {

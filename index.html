@@ -7,6 +7,7 @@
   <meta name="author" content="Надежда Малохатько">
   <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
+  <script src="./scripts/initial-сards.js" defer></script>
   <script src="./scripts/script.js" defer></script>
 </head>
 <body class="page">
@@ -47,20 +48,13 @@
     </li>
   </template>
 
-  <template id="figure">
-    <figure class="figure">
-      <img class="figure__image">
-      <figcaption class="figure__caption"></figcaption>
-    </figure>
-  </template>
-
   <div class="popup popup_type_profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
       <form name="profile-about">
-        <input type="text" name="input-name" class="popup__input-text popup__input-text_type_name">
-        <input type="text" name="input-metier" class="popup__input-text popup__input-text_type_metier">
+        <input type="text" name="input-name_profile" class="popup__input-text popup__input-text_type_name-profile" required>
+        <input type="text" name="input-metier_profile" class="popup__input-text popup__input-text_type_metier-profile" required>
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
     </div>
@@ -71,8 +65,8 @@
       <h2 class="popup__title">Новое место</h2>
       <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
       <form name="create-card">
-        <input type="text" name="input-name" placeholder="Название" class="popup__input-text popup__input-text_type_name">
-        <input type="text" name="input-link" placeholder="Ссылка на картинку" class="popup__input-text popup__input-text_type_link">
+        <input type="text" name="input-name_add-card" placeholder="Название" class="popup__input-text popup__input-text_type_name-card" required>
+        <input type="url" name="input-link_add-card" placeholder="Ссылка на картинку" class="popup__input-text popup__input-text_type_link-card" required>
         <button type="submit" class="popup__save-button">Создать</button>
       </form>
     </div>
@@ -81,6 +75,10 @@
   <div class="popup popup_type_show-image">
     <div class="popup__container popup__container_type_show-image">
       <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
+      <figure class="figure">
+        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз" class="figure__image">
+        <figcaption class="figure__caption">Архыз</figcaption>
+      </figure>
     </div>
   </div>
 </body>
