@@ -26,11 +26,12 @@ const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-bu
 const containerPopupImage = popupShowImage.querySelector('.popup__container_type_show-image');
 const figureTemplate = document.querySelector('#figure').content;
 
-const addElementCard = (item) => {
+const addElementCard = item => {
   const elementListItem = elementTemplate.querySelector('.element').cloneNode(true);
+  const elementImage = elementListItem.querySelector('.element__image');
 
-  elementListItem.querySelector('.element__image').src = item.link;
-  elementListItem.querySelector('.element__image').alt = item.name;
+  elementImage.src = item.link;
+  elementImage.alt = item.name;
   elementListItem.querySelector('.element__title').textContent = item.name;
 
   const elementLikeButton = elementListItem.querySelector('.element__like-button');
@@ -39,7 +40,6 @@ const addElementCard = (item) => {
   const elementTrashButton = elementListItem.querySelector('.element__trash');
   elementTrashButton.addEventListener('click', handleDeleteCard);
 
-  const elementImage = elementListItem.querySelector('.element__image');
   elementImage.addEventListener('click', handleShowImage);
 
   return elementListItem;
