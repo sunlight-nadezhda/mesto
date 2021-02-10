@@ -41,7 +41,7 @@ const addElementCard = item => {
   const elementTrashButton = elementListItem.querySelector('.element__trash');
   elementTrashButton.addEventListener('click', handleDeleteCard);
 
-  elementImage.addEventListener('click', () => handleOpenPopup(event, popupShowImage));
+  elementImage.addEventListener('click', event => handleOpenPopupShowImage(event));
 
   return elementListItem;
 };
@@ -51,31 +51,17 @@ const renderElements = objectsArray => {
   elementsList.append(...htmlList);
 };
 
-const getDataImage = event => {
-  const eventTarget = event.target;
-  const imageName = eventTarget.alt;
-  const imageLink = eventTarget.src;
-  return {
-    name: imageName,
-    link: imageLink
-  };
-}
-
-const handleOpenPopup = (event, popup) => {
+const openPopup = popup => {
   popup.classList.add('popup_opened');
-  if (popup === popupProfile) {
-    nameProfileInput.value = profileName.textContent;
-    jobProfileInput.value = profileMetier.textContent;
-  }
-  if (popup === popupShowImage) {
-    item = getDataImage(event);
-    figureImagePopupImage.src = item.link;
-    figureImagePopupImage.alt = item.name;
-    figureCaptionPopupImage.textContent = item.name;
-  }
 }
 
-const handleClosePopup = popup => {
+const handleOpenPopupProfile = () => {
+  openPopup(popupProfile);
+  nameProfileInput.value = profileName.textContent;
+  jobProfileInput.value = profileMetier.textContent;
+}
+
+const closePopup = popup => {
   popup.classList.remove('popup_opened');
 }
 
@@ -83,8 +69,12 @@ const handleSubmitFormProfile = event => {
   event.preventDefault();
   profileName.textContent = nameProfileInput.value;
   profileMetier.textContent = jobProfileInput.value;
-  handleClosePopup(popupProfile);
+  closePopup(popupProfile);
 };
+
+const handleOpenPopupAddCard = () => {
+  openPopup(popupAddCard);
+}
 
 const handleSubmitFormAddCard = event => {
   event.preventDefault();
@@ -97,7 +87,7 @@ const handleSubmitFormAddCard = event => {
   elementsList.prepend(elementListItem);
   nameAddCardInput.value = '';
   linkAddCardInput.value = '';
-  handleClosePopup(popupAddCard);
+  closePopup(popupAddCard);
 };
 
 const handleChangeLike = event => {
@@ -108,19 +98,37 @@ const handleDeleteCard = event => {
   event.target.closest('.element').remove();
 }
 
-buttonEditProfile.addEventListener('click', () => handleOpenPopup(event, popupProfile));
-buttonClosePopupProfile.addEventListener('click', () => handleClosePopup(popupProfile));
+const getDataImage = event => {
+  const eventTarget = event.target;
+  const imageName = eventTarget.alt;
+  const imageLink = eventTarget.src;
+  return {
+    name: imageName,
+    link: imageLink
+  };
+}
+
+const handleOpenPopupShowImage = event => {
+  openPopup(popupShowImage);
+  const item = getDataImage(event);
+  figureImagePopupImage.src = item.link;
+  figureImagePopupImage.alt = item.name;
+  figureCaptionPopupImage.textContent = item.name;
+}
+
+buttonEditProfile.addEventListener('click', handleOpenPopupProfile);
+buttonClosePopupProfile.addEventListener('click', () => closePopup(popupProfile));
 containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
-buttonAddCard.addEventListener('click', () => handleOpenPopup(event, popupAddCard));
-buttomClosePopupAddCard.addEventListener('click', () => handleClosePopup(popupAddCard));
+buttonAddCard.addEventListener('click', handleOpenPopupAddCard);
+buttomClosePopupAddCard.addEventListener('click', () => closePopup(popupAddCard));
 containerPopupAddCard.addEventListener('submit', handleSubmitFormAddCard);
 
-buttonClosePopupShowImage.addEventListener('click', () => handleClosePopup(popupShowImage));
+buttonClosePopupShowImage.addEventListener('click', () => closePopup(popupShowImage));
 
 popups.forEach(item => item.addEventListener('click', event => {
   if (event.target === event.currentTarget) {
-    handleClosePopup(event.target);
+    closePopup(event.target);
   }
 }));
 renderElements(initialCards);

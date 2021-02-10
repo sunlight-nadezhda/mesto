@@ -9,6 +9,6 @@
   justify-content: center;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 1s linear;
+  transition: visibility 0s, opacity .5s linear;
   display: flex;
 }
