@@ -1,4 +1,6 @@
 const formElement = document.querySelector('.form');
+const inputArray = Array.from(formElement.querySelectorAll('.popup__input'));
+const buttonElement = formElement.querySelector('.popup__save-button');
 
 const showError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -22,10 +24,22 @@ const checkValidity = (formElement, inputElement) => {
   }
 };
 
-const inputArray = Array.from(formElement.querySelectorAll('.popup__input'));
+const hasInvalidInput = inputArray => inputArray.some(inputElement => !inputElement.validity.valid);
+
+const toggleButtonState = (inputArray, buttonElement) => {
+  if (hasInvalidInput(inputArray)) {
+    buttonElement.classList.add('popup__save-button_inactive');
+    buttonElement.setAttribute('disabled', true);
+  } else {
+    buttonElement.classList.remove('popup__save-button_inactive');
+    buttonElement.removeAttribute('disabled');
+  }
+};
+
 inputArray.forEach((inputElement) => {
   inputElement.addEventListener('input', () => {
     checkValidity(formElement, inputElement);
+    toggleButtonState(inputArray, buttonElement);
   });
 });
 
