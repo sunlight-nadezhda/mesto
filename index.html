@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./pages/index.css">
   <script src="./scripts/initial-сards.js" defer></script>
   <script src="./scripts/script.js" defer></script>
+  <script src="./scripts/validate.js" defer></script>
 </head>
 <body class="page">
   <header class="header">
@@ -52,9 +53,15 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
-      <form name="profile-about">
-        <input type="text" name="input-name-profile" class="popup__input-text popup__input-text_type_name-profile" required>
-        <input type="text" name="input-metier-profile" class="popup__input-text popup__input-text_type_metier-profile" required>
+      <form class="form" name="profile-about" novalidate>
+        <label class="form-field">
+          <input type="text" name="input-name-profile" placeholder="Название" class="popup__input popup__input_type_name-profile" id="input-name-profile" required minlength="2" maxlength="40">
+          <span class="popup__input-error input-name-profile-error"></span>
+        </label>
+        <label class="form-field">
+          <input type="text" name="input-metier-profile" placeholder="Ссылка на картинку" class="popup__input popup__input_type_metier-profile" id="input-metier-profile" required minlength="2" maxlength="200">
+          <span class="popup__input-error input-metier-profile-error"></span>
+        </label>
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
     </div>
@@ -65,8 +72,8 @@
       <h2 class="popup__title">Новое место</h2>
       <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
       <form name="create-card">
-        <input type="text" name="input-name-add-card" placeholder="Название" class="popup__input-text popup__input-text_type_name-card" required>
-        <input type="url" name="input-link-add-card" placeholder="Ссылка на картинку" class="popup__input-text popup__input-text_type_link-card" required>
+        <input type="text" name="input-name-add-card" placeholder="Название" class="popup__input popup__input_type_name-card" required>
+        <input type="url" name="input-link-add-card" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link-card" required>
         <button type="submit" class="popup__save-button">Создать</button>
       </form>
     </div>

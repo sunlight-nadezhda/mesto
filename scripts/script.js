@@ -6,20 +6,20 @@ const buttonEditProfile = profile.querySelector('.profile__edit-button');
 const profileName = profile.querySelector('.profile__name');
 const profileMetier = profile.querySelector('.profile__metier');
 
-const popups = document.querySelectorAll('.popup');
+const popups = Array.from(document.querySelectorAll('.popup'));
 const popupProfile = document.querySelector('.popup_type_profile');
 const buttonClosePopupProfile = popupProfile.querySelector('.popup__close-button');
 const containerPopupProfile = popupProfile.querySelector('.popup__container');
-const nameProfileInput = containerPopupProfile.querySelector('.popup__input-text_type_name-profile');
-const jobProfileInput = containerPopupProfile.querySelector('.popup__input-text_type_metier-profile');
+const nameProfileInput = containerPopupProfile.querySelector('.popup__input_type_name-profile');
+const jobProfileInput = containerPopupProfile.querySelector('.popup__input_type_metier-profile');
 
 const buttonAddCard = profile.querySelector('.profile__add-button');
 
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const buttomClosePopupAddCard = popupAddCard.querySelector('.popup__close-button');
 const containerPopupAddCard = popupAddCard.querySelector('.popup__container');
-const nameAddCardInput = containerPopupAddCard.querySelector('.popup__input-text_type_name-card');
-const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input-text_type_link-card');
+const nameAddCardInput = containerPopupAddCard.querySelector('.popup__input_type_name-card');
+const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input_type_link-card');
 
 const popupShowImage = document.querySelector('.popup_type_show-image');
 const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
