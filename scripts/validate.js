@@ -1,6 +1,4 @@
 const formElement = document.querySelector('.form');
-const inputArray = Array.from(formElement.querySelectorAll('.popup__input'));
-const buttonElement = formElement.querySelector('.popup__save-button');
 
 const showError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -36,13 +34,25 @@ const toggleButtonState = (inputArray, buttonElement) => {
   }
 };
 
-inputArray.forEach((inputElement) => {
-  inputElement.addEventListener('input', () => {
-    checkValidity(formElement, inputElement);
-    toggleButtonState(inputArray, buttonElement);
+const setListeners = formElement => {
+  const inputArray = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__save-button');
+  inputArray.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      checkValidity(formElement, inputElement);
+      toggleButtonState(inputArray, buttonElement);
+    });
   });
-});
+};
 
-formElement.addEventListener('submit', evt => {
-  evt.preventDefault();
-});
+const runValidation = () => {
+  let formList = Array.from(document.querySelectorAll('.form'));
+  formList.forEach(formElement => {
+    formElement.addEventListener('submit', evt => {
+      evt.preventDefault();
+    });
+    setListeners(formElement);
+  });
+};
+
+runValidation();
