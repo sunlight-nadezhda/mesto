@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./pages/index.css">
   <script src="./scripts/initial-сards.js" defer></script>
   <script src="./scripts/script.js" defer></script>
+  <script src="./scripts/validate.js" defer></script>
 </head>
 <body class="page">
   <header class="header">
@@ -54,11 +55,11 @@
       <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
       <form class="form" name="profile-about" novalidate>
         <label class="form-field">
-          <input type="text" name="input-name-profile" class="popup__input-text popup__input-text_type_name-profile" id="input-name-profile" required>
+          <input type="text" name="input-name-profile" class="popup__input-text popup__input-text_type_name-profile" id="input-name-profile" required minlength="2" maxlength="40">
           <span class="form__input-error input-name-profile-error"></span>
         </label>
         <label class="form-field">
-          <input type="text" name="input-metier-profile" class="popup__input-text popup__input-text_type_metier-profile" id="input-metier-profile" required>
+          <input type="text" name="input-metier-profile" class="popup__input-text popup__input-text_type_metier-profile" id="input-metier-profile" required minlength="2" maxlength="200">
           <span class="form__input-error input-metier-profile-error"></span>
         </label>
         <button type="submit" class="popup__save-button">Сохранить</button>
