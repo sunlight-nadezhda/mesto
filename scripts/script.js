@@ -6,7 +6,7 @@ const buttonEditProfile = profile.querySelector('.profile__edit-button');
 const profileName = profile.querySelector('.profile__name');
 const profileMetier = profile.querySelector('.profile__metier');
 
-const popups = document.querySelectorAll('.popup');
+const popups = Array.from(document.querySelectorAll('.popup'));
 const popupProfile = document.querySelector('.popup_type_profile');
 const buttonClosePopupProfile = popupProfile.querySelector('.popup__close-button');
 const containerPopupProfile = popupProfile.querySelector('.popup__container');
