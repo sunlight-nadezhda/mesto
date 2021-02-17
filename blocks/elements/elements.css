@@ -4,28 +4,7 @@
   list-style: none;
   padding-top: 50px;
   display: grid;
-  gap: 20px 17px;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-@media (max-width: 1020px) {
-  .elements {
-    grid-template-columns: repeat(2, fit-content(282px));
-    max-width: calc(2 * 282px + 17px);
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 760px) {
-  .elements {
-    max-width: 282px;
-    grid-template-columns: repeat(1, minmax(calc(282 / 880 * 100%), 282px));
-  }
-}
-
-@media (max-width: 400px) {
-  .elements {
-    padding: 0 19px;
-    grid-template-columns: repeat(1, 1fr);
-  }
+  justify-content: center;
+  grid-gap: 20px 17px;
+  grid-template-columns: repeat(auto-fit, 282px);
 }

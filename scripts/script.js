@@ -72,10 +72,6 @@ const handleSubmitFormProfile = event => {
   closePopup(popupProfile);
 };
 
-const handleOpenPopupAddCard = () => {
-  openPopup(popupAddCard);
-}
-
 const handleSubmitFormAddCard = event => {
   event.preventDefault();
   const inputTextName = nameAddCardInput.value;
@@ -120,13 +116,13 @@ buttonEditProfile.addEventListener('click', handleOpenPopupProfile);
 buttonClosePopupProfile.addEventListener('click', () => closePopup(popupProfile));
 containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
-buttonAddCard.addEventListener('click', handleOpenPopupAddCard);
+buttonAddCard.addEventListener('click', () => openPopup(popupAddCard));
 buttomClosePopupAddCard.addEventListener('click', () => closePopup(popupAddCard));
 containerPopupAddCard.addEventListener('submit', handleSubmitFormAddCard);
 
 buttonClosePopupShowImage.addEventListener('click', () => closePopup(popupShowImage));
 
-popups.forEach(item => item.addEventListener('click', event => {
+popups.forEach(item => item.addEventListener('mousedown', event => {
   if (event.target === event.currentTarget) {
     closePopup(event.target);
   }
