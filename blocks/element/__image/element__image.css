@@ -3,6 +3,7 @@
   object-fit: cover;
   height: 282px;
   display: block;
+  filter: brightness(90%);
 }
 
 .element__image:hover {

@@ -51,8 +51,16 @@ const renderElements = objectsArray => {
   elementsList.append(...htmlList);
 };
 
+const closePopupByEsc = event => {
+  if (event.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+};
+
 const openPopup = popup => {
   popup.classList.add('popup_opened');
+
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 const handleOpenPopupProfile = () => {
@@ -62,7 +70,23 @@ const handleOpenPopupProfile = () => {
 }
 
 const closePopup = popup => {
+  const inputElements = Array.from(popup.querySelectorAll('.popup__input'));
+  const inputErrorElements = Array.from(popup.querySelectorAll('.popup__input-error'));
+  inputElements.forEach(element => element.classList.remove('popup__input_type_error'));
+  inputErrorElements.forEach(element => element.textContent = '');
   popup.classList.remove('popup_opened');
+  Array.from(document.forms).forEach(formElement => {
+    const formFields = Array.from(formElement.querySelectorAll('.popup__form-field'));
+    const buttonElement = formElement.querySelector('.popup__save-button');
+    formElement.reset();
+    formElement.style.marginTop = '17px';
+    formFields.forEach(formField => {
+      formField.style.marginTop = '29px';
+    });
+    buttonElement.style.marginTop = '48px';
+  });
+
+  document.removeEventListener('keydown', closePopupByEsc);
 }
 
 const handleSubmitFormProfile = event => {
@@ -81,8 +105,6 @@ const handleSubmitFormAddCard = event => {
     link: inputTextLink
   });
   elementsList.prepend(elementListItem);
-  nameAddCardInput.value = '';
-  linkAddCardInput.value = '';
   closePopup(popupAddCard);
 };
 
@@ -122,9 +144,10 @@ containerPopupAddCard.addEventListener('submit', handleSubmitFormAddCard);
 
 buttonClosePopupShowImage.addEventListener('click', () => closePopup(popupShowImage));
 
-popups.forEach(item => item.addEventListener('mousedown', event => {
+popups.forEach(popup => popup.addEventListener('mousedown', event => {
   if (event.target === event.currentTarget) {
     closePopup(event.target);
   }
 }));
+
 renderElements(initialCards);
