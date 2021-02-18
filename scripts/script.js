@@ -51,8 +51,16 @@ const renderElements = objectsArray => {
   elementsList.append(...htmlList);
 };
 
+const closePopupByEsc = event => {
+  if (event.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+};
+
 const openPopup = popup => {
   popup.classList.add('popup_opened');
+
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 const handleOpenPopupProfile = () => {
@@ -77,6 +85,8 @@ const closePopup = popup => {
     });
     buttonElement.style.marginTop = '48px';
   });
+
+  document.removeEventListener('keydown', closePopupByEsc);
 }
 
 const handleSubmitFormProfile = event => {
@@ -139,11 +149,5 @@ popups.forEach(popup => popup.addEventListener('mousedown', event => {
     closePopup(event.target);
   }
 }));
-
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-});
 
 renderElements(initialCards);

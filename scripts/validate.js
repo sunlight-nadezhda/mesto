@@ -60,7 +60,7 @@ const setListeners = formElement => {
   buttonElement.style.marginTop = '48px';
 };
 
-const runValidation = () => {
+const enableValidation = () => {
   let formArray = Array.from(document.querySelectorAll('.popup__form'));
   formArray.forEach(formElement => {
     formElement.addEventListener('submit', evt => {
@@ -70,4 +70,4 @@ const runValidation = () => {
   });
 };
 
-runValidation();
+enableValidation();
