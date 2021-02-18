@@ -62,7 +62,12 @@ const handleOpenPopupProfile = () => {
 }
 
 const closePopup = popup => {
+  const inputElements = Array.from(popup.querySelectorAll('.popup__input'));
+  const inputErrorElements = Array.from(popup.querySelectorAll('.popup__input-error'));
+  inputElements.forEach(element => element.classList.remove('popup__input_type_error'));
+  inputErrorElements.forEach(element => element.textContent = '');
   popup.classList.remove('popup_opened');
+  Array.from(document.forms).forEach(formElement => formElement.reset());
 }
 
 const handleSubmitFormProfile = event => {
@@ -81,8 +86,6 @@ const handleSubmitFormAddCard = event => {
     link: inputTextLink
   });
   elementsList.prepend(elementListItem);
-  nameAddCardInput.value = '';
-  linkAddCardInput.value = '';
   closePopup(popupAddCard);
 };
 
@@ -122,9 +125,10 @@ containerPopupAddCard.addEventListener('submit', handleSubmitFormAddCard);
 
 buttonClosePopupShowImage.addEventListener('click', () => closePopup(popupShowImage));
 
-popups.forEach(item => item.addEventListener('mousedown', event => {
+popups.forEach(popup => popup.addEventListener('mousedown', event => {
   if (event.target === event.currentTarget) {
     closePopup(event.target);
   }
 }));
+
 renderElements(initialCards);
