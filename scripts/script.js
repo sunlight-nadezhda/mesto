@@ -131,4 +131,10 @@ popups.forEach(popup => popup.addEventListener('mousedown', event => {
   }
 }));
 
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+});
+
 renderElements(initialCards);
