@@ -1,5 +1,7 @@
 .popup__input-error {
   font-size: 12px;
   line-height: calc(15 / 12);
-  /* padding-top: 5px; */
+  position: absolute;
+  top: 30px;
+  left: 0;
 }
