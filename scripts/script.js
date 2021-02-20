@@ -77,6 +77,9 @@ const closePopup = popup => {
   popup.classList.remove('popup_opened');
   Array.from(document.forms).forEach(formElement => {
     formElement.reset();
+    const buttonElement = formElement.querySelector('.popup__save-button');
+    buttonElement.classList.add('popup__save-button_inactive');
+    buttonElement.setAttribute('disabled', true);
   });
 
   document.removeEventListener('keydown', closePopupByEsc);
