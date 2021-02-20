@@ -64,14 +64,11 @@ const openPopup = popup => {
 
 const clearForm = (popup) => {
   const formElement = popup.querySelector('.popup__form');
-  const inputElements = Array.from(formElement.querySelectorAll('.popup__input'));
-  const inputErrorElements = Array.from(formElement.querySelectorAll('.popup__input-error'));
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   const buttonElement = formElement.querySelector('.popup__save-button');
   formElement.reset();
-  inputElements.forEach(element => element.classList.remove('popup__input_type_error'));
-  inputErrorElements.forEach(element => element.textContent = '');
-  buttonElement.classList.add('popup__save-button_inactive');
-  buttonElement.setAttribute('disabled', true);
+  inputList.forEach(element => hideError(formElement, element, 'popup__input_type_error', 'popup__input-error_active'));
+  toggleButtonState(inputList, buttonElement, 'popup__save-button_inactive');
 };
 
 const handleOpenPopupProfile = () => {
