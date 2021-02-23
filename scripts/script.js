@@ -7,6 +7,7 @@ const profileName = profile.querySelector('.profile__name');
 const profileMetier = profile.querySelector('.profile__metier');
 
 const popups = Array.from(document.querySelectorAll('.popup'));
+
 const popupProfile = document.querySelector('.popup_type_profile');
 const buttonClosePopupProfile = popupProfile.querySelector('.popup__close-button');
 const containerPopupProfile = popupProfile.querySelector('.popup__container');
@@ -30,17 +31,16 @@ const figureCaptionPopupImage = popupShowImage.querySelector('.figure__caption')
 const createCard = item => {
   const elementListItem = elementTemplate.querySelector('.element').cloneNode(true);
   const elementImage = elementListItem.querySelector('.element__image');
+  const elementTitle = elementListItem.querySelector('.element__title');
+  const elementLikeButton = elementListItem.querySelector('.element__like-button');
+  const elementTrashButton = elementListItem.querySelector('.element__trash');
 
   elementImage.src = item.link;
   elementImage.alt = item.name;
-  elementListItem.querySelector('.element__title').textContent = item.name;
+  elementTitle.textContent = item.name;
 
-  const elementLikeButton = elementListItem.querySelector('.element__like-button');
   elementLikeButton.addEventListener('click', handleChangeLike);
-
-  const elementTrashButton = elementListItem.querySelector('.element__trash');
   elementTrashButton.addEventListener('click', handleDeleteCard);
-
   elementImage.addEventListener('click', event => handleOpenPopupShowImage(event));
 
   return elementListItem;
@@ -62,17 +62,17 @@ const openPopup = popup => {
   document.addEventListener('keydown', closePopupByEsc);
 }
 
-const clearForm = (popup) => {
-  const formElement = popup.querySelector('.popup__form');
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save-button');
+const clearForm = (popup, options) => {
+  const formElement = popup.querySelector(options.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(options.inputSelector));
+  const buttonElement = formElement.querySelector(options.submitButtonSelector);
   formElement.reset();
-  inputList.forEach(element => hideError(formElement, element, 'popup__input_type_error', 'popup__input-error_active'));
-  toggleButtonState(inputList, buttonElement, 'popup__save-button_inactive');
+  inputList.forEach(element => hideError(formElement, element, options.inputErrorClass, options.errorClass));
+  toggleButtonState(inputList, buttonElement, options.inactiveButtonClass);
 };
 
 const handleOpenPopupProfile = () => {
-  clearForm(popupProfile);
+  clearForm(popupProfile, validationConfig);
   openPopup(popupProfile);
   nameProfileInput.value = profileName.textContent;
   jobProfileInput.value = profileMetier.textContent;
@@ -133,7 +133,7 @@ buttonClosePopupProfile.addEventListener('click', () => closePopup(popupProfile)
 containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
 buttonAddCard.addEventListener('click', () => {
-  clearForm(popupAddCard);
+  clearForm(popupAddCard, validationConfig);
   openPopup(popupAddCard);
 });
 buttomClosePopupAddCard.addEventListener('click', () => closePopup(popupAddCard));
