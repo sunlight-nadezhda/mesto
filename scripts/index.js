@@ -1,6 +1,6 @@
+import { initialCards, validationConfig } from './constants.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import { initialCards } from './initial-сards.js';
 
 const elementsList = document.querySelector('.elements');
 // const elementTemplate = document.querySelector('#element').content;
@@ -156,3 +156,6 @@ popups.forEach(popup => popup.addEventListener('mousedown', event => {
 }));
 
 renderElements(initialCards, elementsList);
+
+const formValidator = new FormValidator(validationConfig);
+formValidator.enableValidation();

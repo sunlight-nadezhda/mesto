@@ -35,7 +35,11 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    this._trashButton.closest('.element').remove();
+    this._element.remove();
+  }
+
+  _handleShowImage() {
+
   }
 
   _setEventListeners() {
