@@ -1,5 +1,9 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import { initialCards } from './initial-сards.js';
+
 const elementsList = document.querySelector('.elements');
-const elementTemplate = document.querySelector('#element').content;
+// const elementTemplate = document.querySelector('#element').content;
 
 const profile = document.querySelector('.profile');
 const buttonEditProfile = profile.querySelector('.profile__edit-button');
@@ -24,30 +28,34 @@ const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input_type
 
 const popupShowImage = document.querySelector('.popup_type_show-image');
 const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
-const containerPopupImage = popupShowImage.querySelector('.popup__container_type_show-image');
+// const containerPopupImage = popupShowImage.querySelector('.popup__container_type_show-image');
 const figureImagePopupImage = popupShowImage.querySelector('.figure__image');
 const figureCaptionPopupImage = popupShowImage.querySelector('.figure__caption');
 
 const createCard = item => {
-  const elementListItem = elementTemplate.querySelector('.element').cloneNode(true);
-  const elementImage = elementListItem.querySelector('.element__image');
-  const elementTitle = elementListItem.querySelector('.element__title');
-  const elementLikeButton = elementListItem.querySelector('.element__like-button');
-  const elementTrashButton = elementListItem.querySelector('.element__trash');
+  // const elementListItem = elementTemplate.querySelector('.element').cloneNode(true);
+  // const elementImage = elementListItem.querySelector('.element__image');
+  // const elementTitle = elementListItem.querySelector('.element__title');
+  // const elementLikeButton = elementListItem.querySelector('.element__like-button');
+  // const elementTrashButton = elementListItem.querySelector('.element__trash');
 
-  elementImage.src = item.link;
-  elementImage.alt = item.name;
-  elementTitle.textContent = item.name;
+  // elementImage.src = item.link;
+  // elementImage.alt = item.name;
+  // elementTitle.textContent = item.name;
 
-  elementLikeButton.addEventListener('click', handleChangeLike);
-  elementTrashButton.addEventListener('click', handleDeleteCard);
+  // elementLikeButton.addEventListener('click', handleChangeLike);
+  // elementTrashButton.addEventListener('click', handleDeleteCard);
   elementImage.addEventListener('click', event => handleOpenPopupShowImage(event));
 
-  return elementListItem;
+  // return elementListItem;
 };
 
 const renderElements = (objectsArray, elementsList) => {
-  const htmlList = objectsArray.map(createCard);
+  const htmlList = objectsArray.map(item => {
+    const card = new Card(item, '#element');
+    const cardElement = card.createCard();
+    return cardElement;
+  });
   elementsList.append(...htmlList);
 };
 
@@ -102,13 +110,13 @@ const handleSubmitFormAddCard = event => {
   closePopup(popupAddCard);
 };
 
-const handleChangeLike = event => {
-  event.target.classList.toggle('element__like-button_active');
-}
+// const handleChangeLike = event => {
+//   event.target.classList.toggle('element__like-button_active');
+// }
 
-const handleDeleteCard = event => {
-  event.target.closest('.element').remove();
-}
+// const handleDeleteCard = event => {
+//   event.target.closest('.element').remove();
+// }
 
 const getDataImage = event => {
   const eventTarget = event.target;
