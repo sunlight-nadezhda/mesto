@@ -29,10 +29,15 @@ const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input_type
 const popupShowImage = document.querySelector('.popup_type_show-image');
 const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
 
+const createCard = (data, selector) => {
+  const card = new Card(data, selector);
+  const cardElement = card.createCard();
+  return cardElement;
+};
+
 const renderElements = (objectsArray, elementsList) => {
   const htmlList = objectsArray.map(item => {
-    const card = new Card(item, '#element');
-    const cardElement = card.createCard();
+    const cardElement = createCard(item, '#element');
     return cardElement;
   });
   elementsList.append(...htmlList);
@@ -73,12 +78,11 @@ const handleSubmitFormAddCard = event => {
   event.preventDefault();
   const inputTextName = nameAddCardInput.value;
   const inputTextLink = linkAddCardInput.value;
-  const card = new Card({
+  const elementListItem = createCard({
     name: inputTextName,
     link: inputTextLink
   },
   '#element');
-  const elementListItem = card.createCard();
   elementsList.prepend(elementListItem);
   closePopup(popupAddCard);
 };
