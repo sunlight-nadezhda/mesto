@@ -1,3 +1,5 @@
+import { openPopup } from './index.js';
+
 export default class Card {
   constructor(data, selector) {
     this._name = data.name;
@@ -19,13 +21,13 @@ export default class Card {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.element__like-button');
     this._trashButton = this._element.querySelector('.element__trash');
+    this._elementImage = this._element.querySelector('.element__image');
+    this._elementTitle = this._element.querySelector('.element__title');
     this._setEventListeners();
-    const elementImage = this._element.querySelector('.element__image');
-    const elementTitle = this._element.querySelector('.element__title');
 
-    elementImage.src = this._link;
-    elementImage.alt = this._name;
-    elementTitle.textContent = this._name;
+    this._elementImage.src = this._link;
+    this._elementImage.alt = this._name;
+    this._elementTitle.textContent = this._name;
 
     return this._element;
   }
@@ -39,7 +41,13 @@ export default class Card {
   }
 
   _handleShowImage() {
-
+    const popupShowImage = document.querySelector('.popup_type_show-image');
+    this._figureImagePopupImage = popupShowImage.querySelector('.figure__image');
+    this._figureCaptionPopupImage = popupShowImage.querySelector('.figure__caption');
+    openPopup(popupShowImage);
+    this._figureImagePopupImage.src = this._link;
+    this._figureImagePopupImage.alt = this._name;
+    this._figureCaptionPopupImage.textContent = this._name;
   }
 
   _setEventListeners() {
@@ -49,6 +57,10 @@ export default class Card {
 
     this._trashButton.addEventListener('click', () => {
       this._handleDeleteCard();
+    });
+
+    this._elementImage.addEventListener('click', () => {
+      this._handleShowImage();
     });
   }
 }
