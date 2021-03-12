@@ -1,4 +1,5 @@
-import { initialCards, validationConfig } from './constants.js';
+import { initialCards, validationConfig } from './utils/constants.js';
+import { openPopup } from './utils/utils.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
@@ -42,11 +43,6 @@ const closePopupByEsc = event => {
     closePopup(document.querySelector('.popup_opened'));
   }
 };
-
-const openPopup = popup => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
-}
 
 const addFormValidator = (popup, selector) => {
   const formElement = popup.querySelector(selector);
