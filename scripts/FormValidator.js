@@ -45,12 +45,9 @@ export default class FormValidator {
   }
 
   _clearForm() {
-    // const formElement = popup.querySelector(options.formSelector);
-    // const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    // const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     this._formElement.reset();
     this._inputList.forEach(element => this._hideError(element));
-    // this._toggleButtonState();
+    this._toggleButtonState();
   }
 
   _setListeners() {

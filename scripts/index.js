@@ -1,5 +1,5 @@
 import { initialCards, validationConfig } from './utils/constants.js';
-import { openPopup } from './utils/utils.js';
+import { closePopupByEsc, openPopup } from './utils/utils.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
@@ -41,12 +41,6 @@ const renderElements = (objectsArray, elementsList) => {
     return cardElement;
   });
   elementsList.append(...htmlList);
-};
-
-const closePopupByEsc = event => {
-  if (event.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
 };
 
 const addFormValidator = (popup, selector) => {
