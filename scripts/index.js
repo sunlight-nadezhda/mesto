@@ -43,14 +43,10 @@ const renderElements = (objectsArray, elementsList) => {
   elementsList.append(...htmlList);
 };
 
-const addFormValidator = (popup, selector) => {
-  const formElement = popup.querySelector(selector);
-  const formValidator = new FormValidator(validationConfig, formElement);
-  formValidator.enableValidation();
-};
-
 const handleOpenPopupProfile = () => {
-  addFormValidator(popupProfile, validationConfig.formSelector);
+  const formElement = popupProfile.querySelector(validationConfig.formSelector);
+  const profileFormValidator = new FormValidator(validationConfig, formElement);
+  profileFormValidator.enableValidation()
   openPopup(popupProfile);
   nameProfileInput.value = profileName.textContent;
   jobProfileInput.value = profileMetier.textContent;
@@ -86,7 +82,9 @@ buttonClosePopupProfile.addEventListener('click', () => closePopup(popupProfile)
 containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
 buttonAddCard.addEventListener('click', () => {
-  addFormValidator(popupAddCard, validationConfig.formSelector);
+  const formElement = popupAddCard.querySelector(validationConfig.formSelector);
+  const addCardFormValidator = new FormValidator(validationConfig, formElement);
+  addCardFormValidator.enableValidation()
   openPopup(popupAddCard);
 });
 buttomClosePopupAddCard.addEventListener('click', () => closePopup(popupAddCard));
