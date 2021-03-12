@@ -1,4 +1,5 @@
-import { initialCards, validationConfig } from './constants.js';
+import { initialCards, validationConfig } from './utils/constants.js';
+import { closePopupByEsc, openPopup } from './utils/utils.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
@@ -28,34 +29,24 @@ const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input_type
 const popupShowImage = document.querySelector('.popup_type_show-image');
 const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
 
+const createCard = (data, selector) => {
+  const card = new Card(data, selector);
+  const cardElement = card.createCard();
+  return cardElement;
+};
+
 const renderElements = (objectsArray, elementsList) => {
   const htmlList = objectsArray.map(item => {
-    const card = new Card(item, '#element');
-    const cardElement = card.createCard();
+    const cardElement = createCard(item, '#element');
     return cardElement;
   });
   elementsList.append(...htmlList);
 };
 
-const closePopupByEsc = event => {
-  if (event.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-};
-
-const openPopup = popup => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
-}
-
-const addFormValidator = (popup, selector) => {
-  const formElement = popup.querySelector(selector);
-  const formValidator = new FormValidator(validationConfig, formElement);
-  formValidator.enableValidation();
-};
-
 const handleOpenPopupProfile = () => {
-  addFormValidator(popupProfile, validationConfig.formSelector);
+  const formElement = popupProfile.querySelector(validationConfig.formSelector);
+  const profileFormValidator = new FormValidator(validationConfig, formElement);
+  profileFormValidator.enableValidation()
   openPopup(popupProfile);
   nameProfileInput.value = profileName.textContent;
   jobProfileInput.value = profileMetier.textContent;
@@ -77,12 +68,11 @@ const handleSubmitFormAddCard = event => {
   event.preventDefault();
   const inputTextName = nameAddCardInput.value;
   const inputTextLink = linkAddCardInput.value;
-  const card = new Card({
+  const elementListItem = createCard({
     name: inputTextName,
     link: inputTextLink
   },
   '#element');
-  const elementListItem = card.createCard();
   elementsList.prepend(elementListItem);
   closePopup(popupAddCard);
 };
@@ -92,7 +82,9 @@ buttonClosePopupProfile.addEventListener('click', () => closePopup(popupProfile)
 containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
 buttonAddCard.addEventListener('click', () => {
-  addFormValidator(popupAddCard, validationConfig.formSelector);
+  const formElement = popupAddCard.querySelector(validationConfig.formSelector);
+  const addCardFormValidator = new FormValidator(validationConfig, formElement);
+  addCardFormValidator.enableValidation()
   openPopup(popupAddCard);
 });
 buttomClosePopupAddCard.addEventListener('click', () => closePopup(popupAddCard));
