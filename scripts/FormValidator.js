@@ -44,12 +44,6 @@ export default class FormValidator {
     }
   }
 
-  _clearForm() {
-    this._formElement.reset();
-    this._inputList.forEach(element => this._hideError(element));
-    this._toggleButtonState();
-  }
-
   _setListeners() {
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
@@ -66,6 +60,5 @@ export default class FormValidator {
       evt.preventDefault();
     });
     this._setListeners();
-    this._clearForm();
   }
 }
