@@ -47,19 +47,8 @@ const renderElements = (objectsArray, elementsList) => {
   elementsList.append(...htmlList);
 };
 
-const clearFormFields = formElement => {
-  formElement.reset();
-  const buttonSubmit = formElement.querySelector('.popup__save-button');
-  const errorMessageElements = Array.from(formElement.querySelectorAll('.popup__input-error'));
-  const inputElements = Array.from(formElement.querySelectorAll('.popup__input'));
-  buttonSubmit.classList.add('popup__save-button_inactive');
-  buttonSubmit.setAttribute('disabled', 'disabled');
-  errorMessageElements.map(element => element.textContent = '');
-  inputElements.map(element => element.classList.remove('popup__input_type_error'));
-}
-
 const handleOpenPopupProfile = () => {
-  clearFormFields(profileFormElement);
+  profileFormValidator.clearFormFields();
   openPopup(popupProfile);
   nameProfileInput.value = profileName.textContent;
   jobProfileInput.value = profileMetier.textContent;
@@ -95,7 +84,7 @@ buttonClosePopupProfile.addEventListener('click', () => closePopup(popupProfile)
 containerPopupProfile.addEventListener('submit', handleSubmitFormProfile);
 
 buttonAddCard.addEventListener('click', () => {
-  clearFormFields(addCardFormElement);
+  addCardFormValidator.clearFormFields();
   openPopup(popupAddCard);
 });
 buttonClosePopupAddCard.addEventListener('click', () => closePopup(popupAddCard));
