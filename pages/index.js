@@ -33,6 +33,8 @@ const elementsList = new Section({
   renderer: createCard
 }, '.elements');
 
+const popupShowImage = new PopupWithImage('.popup_type_show-image');
+
 const userPofile = new UserInfo('.profile__name', '.profile__metier');
 
 const popupProfile = new PopupWithForm('.popup_type_profile', (data) => {
@@ -69,8 +71,6 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', (data) => {
 });
 
 const addCardFormValidator = new FormValidator(validationConfig, addCardFormElement);
-
-const popupShowImage = new PopupWithImage('.popup_type_show-image');
 
 const htmlList = elementsList.renderItems();
 htmlList.forEach(card => elementsList.addItem(card));
