@@ -4,6 +4,7 @@ import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 // const elementsList = document.querySelector('.elements');
 
@@ -34,8 +35,7 @@ const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input_type
 const addCardFormElement = popupAddCard.querySelector('.popup__form');
 const addCardFormValidator = new FormValidator(validationConfig, addCardFormElement);
 
-const popupShowImage = new PopupWithImage('.popup_type_show-image');
-popupShowImage.setEventListeners();
+
 // const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
 
 // const createCard = (data, selector) => {
@@ -52,6 +52,8 @@ const elementsList = new Section({
     return cardElement;
   }
 }, '.elements');
+
+const popupShowImage = new PopupWithImage('.popup_type_show-image');
 
 // const renderElements = (objectsArray, elementsList) => {
 //   const htmlList = objectsArray.map(item => {
@@ -118,3 +120,5 @@ addCardFormValidator.enableValidation();
 // renderElements(initialCards, elementsList);
 const htmlList = elementsList.renderItems();
 elementsList.addItem(...htmlList);
+
+popupShowImage.setEventListeners();
