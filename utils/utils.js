@@ -5,7 +5,7 @@ const closePopupByEsc = event => {
 };
 
 const openPopup = popup => {
-  popup.classList.add('popup_opened');
+  // popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
 }
 
