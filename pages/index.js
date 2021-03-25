@@ -186,7 +186,8 @@ addCardFormValidator.enableValidation();
 
 // renderElements(initialCards, elementsList);
 const htmlList = elementsList.renderItems();
-elementsList.addItem(...htmlList);
+// elementsList.addItem(...htmlList);
+htmlList.forEach(card => elementsList.addItem(card));
 
 popupShowImage.setEventListeners();
 popupProfile.setEventListeners();
