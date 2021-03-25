@@ -15,14 +15,14 @@ const profileMetier = profile.querySelector('.profile__metier');
 
 const popups = Array.from(document.querySelectorAll('.popup'));
 
-const popupProfile = new PopupWithForm('.popup_type_profile');
+
 // const popupProfile = document.querySelector('.popup_type_profile');
 // const buttonClosePopupProfile = popupProfile.querySelector('.popup__close-button');
-const containerPopupProfile = popupProfile.querySelector('.popup__container');
-const nameProfileInput = containerPopupProfile.querySelector('.popup__input_type_name-profile');
-const jobProfileInput = containerPopupProfile.querySelector('.popup__input_type_metier-profile');
-const profileFormElement = popupProfile.querySelector('.popup__form');
-const profileFormValidator = new FormValidator(validationConfig, profileFormElement);
+// const containerPopupProfile = popupProfile.querySelector('.popup__container');
+// const nameProfileInput = containerPopupProfile.querySelector('.popup__input_type_name-profile');
+// const jobProfileInput = containerPopupProfile.querySelector('.popup__input_type_metier-profile');
+// const profileFormElement = popupProfile.querySelector('.popup__form');
+
 
 const buttonAddCard = profile.querySelector('.profile__add-button');
 
@@ -63,6 +63,14 @@ const popupShowImage = new PopupWithImage('.popup_type_show-image');
 //   elementsList.append(...htmlList);
 // };
 
+const popupProfile = new PopupWithForm('.popup_type_profile', evt => {
+  evt.preventDefault();
+  profileName.textContent = nameProfileInput.value;
+  profileMetier.textContent = jobProfileInput.value;
+});
+
+const profileFormValidator = new FormValidator(validationConfig, profileFormElement);
+
 const handleOpenPopupProfile = () => {
   profileFormValidator.clearFormFields();
   openPopup(popupProfile);
@@ -75,12 +83,12 @@ const handleOpenPopupProfile = () => {
 //   document.removeEventListener('keydown', closePopupByEsc);
 // }
 
-const handleSubmitFormProfile = event => {
-  event.preventDefault();
-  profileName.textContent = nameProfileInput.value;
-  profileMetier.textContent = jobProfileInput.value;
-  popupProfile.close();
-};
+// const handleSubmitFormProfile = event => {
+//   event.preventDefault();
+//   profileName.textContent = nameProfileInput.value;
+//   profileMetier.textContent = jobProfileInput.value;
+//   popupProfile.close();
+// };
 
 const handleSubmitFormAddCard = event => {
   event.preventDefault();
