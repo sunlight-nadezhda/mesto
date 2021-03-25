@@ -5,13 +5,15 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 // const elementsList = document.querySelector('.elements');
 
-const profile = document.querySelector('.profile');
-const buttonEditProfile = profile.querySelector('.profile__edit-button');
-const profileName = profile.querySelector('.profile__name');
-const profileMetier = profile.querySelector('.profile__metier');
+// const profile = document.querySelector('.profile');
+// const buttonEditProfile = profile.querySelector('.profile__edit-button');
+// const profileName = profile.querySelector('.profile__name');
+// const profileMetier = profile.querySelector('.profile__metier');
+const buttonEditProfile = document.querySelector('.profile__edit-button');
 
 // const popups = Array.from(document.querySelectorAll('.popup'));
 
@@ -71,12 +73,15 @@ const popupProfile = new PopupWithForm('.popup_type_profile', evt => {
 
 const profileFormValidator = new FormValidator(validationConfig, profileFormElement);
 
+const userPofile = new UserInfo('.profile__name', '.profile__metier');
+
 const handleOpenPopupProfile = () => {
   profileFormValidator.clearFormFields();
   // openPopup(popupProfile);
   popupProfile.open();
-  nameProfileInput.value = profileName.textContent;
-  jobProfileInput.value = profileMetier.textContent;
+  const { name, metier } = userPofile.getUserInfo();
+  nameProfileInput.value = name;
+  jobProfileInput.value = metier;
 }
 
 // const closePopup = popup => {
