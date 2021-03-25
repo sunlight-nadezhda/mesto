@@ -1,1 +1,1 @@
-export default class PopupWithImage {}
+export default class PopupWithImage extends Popup {}
