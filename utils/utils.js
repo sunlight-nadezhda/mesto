@@ -4,9 +4,9 @@ const closePopupByEsc = event => {
   }
 };
 
-const openPopup = popup => {
-  // popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
-}
+// const openPopup = popup => {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closePopupByEsc);
+// }
 
 export { closePopupByEsc, openPopup };

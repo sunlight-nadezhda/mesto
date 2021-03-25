@@ -54,10 +54,10 @@ const handleOpenPopupProfile = () => {
   jobProfileInput.value = profileMetier.textContent;
 }
 
-const closePopup = popup => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByEsc);
-}
+// const closePopup = popup => {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closePopupByEsc);
+// }
 
 const handleSubmitFormProfile = event => {
   event.preventDefault();
