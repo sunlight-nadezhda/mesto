@@ -43,9 +43,19 @@ const addCardFormElement = addCardPopup.querySelector('.popup__form');
 const cardsContainer = document.querySelector('.elements');
 
 // const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
+const popupShowImage = new PopupWithImage('.popup_type_show-image');
 
 const createCard = (data) => {
-  const card = new Card(data, '#element');
+  const card = new Card(data, '#element', (data) => {
+    // const popupShowImage = document.querySelector('.popup_type_show-image');
+    // this._figureImagePopupImage = popupShowImage.querySelector('.figure__image');
+    // this._figureCaptionPopupImage = popupShowImage.querySelector('.figure__caption');
+    // openPopup(popupShowImage);
+    popupShowImage.open(data);
+    // this._figureImagePopupImage.src = this._link;
+    // this._figureImagePopupImage.alt = this._name;
+    // this._figureCaptionPopupImage.textContent = this._name;
+  });
   const cardElement = card.createCard();
   return cardElement;
 };
@@ -64,7 +74,7 @@ const elementsList = new Section({
 //   }
 // }, '.elements');
 
-const popupShowImage = new PopupWithImage('.popup_type_show-image');
+
 
 // const renderElements = (objectsArray, elementsList) => {
 //   const htmlList = objectsArray.map(item => {
