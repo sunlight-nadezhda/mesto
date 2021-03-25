@@ -1,7 +1,7 @@
-import { initialCards, validationConfig } from './utils/constants.js';
-import { closePopupByEsc, openPopup } from './utils/utils.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import { initialCards, validationConfig } from '../utils/constants.js';
+import { closePopupByEsc, openPopup } from '../utils/utils.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 
 const elementsList = document.querySelector('.elements');
 
