@@ -67,7 +67,7 @@ const handleSubmitFormProfile = event => {
   event.preventDefault();
   profileName.textContent = nameProfileInput.value;
   profileMetier.textContent = jobProfileInput.value;
-  closePopup(popupProfile);
+  popupProfile.close();
 };
 
 const handleSubmitFormAddCard = event => {
