@@ -2,6 +2,7 @@ import { initialCards, validationConfig } from '../utils/constants.js';
 import { closePopupByEsc, openPopup } from '../utils/utils.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const elementsList = document.querySelector('.elements');
 
@@ -12,7 +13,8 @@ const profileMetier = profile.querySelector('.profile__metier');
 
 const popups = Array.from(document.querySelectorAll('.popup'));
 
-const popupProfile = document.querySelector('.popup_type_profile');
+const popupProfile = new PopupWithForm('.popup_type_profile');
+// const popupProfile = document.querySelector('.popup_type_profile');
 // const buttonClosePopupProfile = popupProfile.querySelector('.popup__close-button');
 const containerPopupProfile = popupProfile.querySelector('.popup__container');
 const nameProfileInput = containerPopupProfile.querySelector('.popup__input_type_name-profile');
@@ -22,7 +24,8 @@ const profileFormValidator = new FormValidator(validationConfig, profileFormElem
 
 const buttonAddCard = profile.querySelector('.profile__add-button');
 
-const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupAddCard = new PopupWithForm('.popup_type_add-card');
+// const popupAddCard = document.querySelector('.popup_type_add-card');
 // const buttonClosePopupAddCard = popupAddCard.querySelector('.popup__close-button');
 const containerPopupAddCard = popupAddCard.querySelector('.popup__container');
 const nameAddCardInput = containerPopupAddCard.querySelector('.popup__input_type_name-card');
@@ -30,7 +33,8 @@ const linkAddCardInput = containerPopupAddCard.querySelector('.popup__input_type
 const addCardFormElement = popupAddCard.querySelector('.popup__form');
 const addCardFormValidator = new FormValidator(validationConfig, addCardFormElement);
 
-const popupShowImage = document.querySelector('.popup_type_show-image');
+const popupShowImage = new PopupWithImage('.popup_type_show-image');
+popupShowImage.setEventListeners();
 // const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
 
 const createCard = (data, selector) => {
@@ -63,7 +67,7 @@ const handleSubmitFormProfile = event => {
   event.preventDefault();
   profileName.textContent = nameProfileInput.value;
   profileMetier.textContent = jobProfileInput.value;
-  closePopup(popupProfile);
+  popupProfile.close();
 };
 
 const handleSubmitFormAddCard = event => {
