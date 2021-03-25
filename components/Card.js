@@ -1,10 +1,11 @@
-import { openPopup } from '../utils/utils.js';
+// import { openPopup } from '../utils/utils.js';
 
 export default class Card {
-  constructor(data, selector) {
+  constructor(data, selector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -22,12 +23,12 @@ export default class Card {
     this._likeButton = this._element.querySelector('.element__like-button');
     this._trashButton = this._element.querySelector('.element__trash');
     this._elementImage = this._element.querySelector('.element__image');
-    this._elementTitle = this._element.querySelector('.element__title');
+    const elementTitle = this._element.querySelector('.element__title');
     this._setEventListeners();
 
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
-    this._elementTitle.textContent = this._name;
+    elementTitle.textContent = this._name;
 
     return this._element;
   }

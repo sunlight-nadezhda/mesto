@@ -1,10 +1,11 @@
 import { initialCards, validationConfig } from '../utils/constants.js';
-import { closePopupByEsc, openPopup } from '../utils/utils.js';
+// import { closePopupByEsc, openPopup } from '../utils/utils.js';
+import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 
-const elementsList = document.querySelector('.elements');
+// const elementsList = document.querySelector('.elements');
 
 const profile = document.querySelector('.profile');
 const buttonEditProfile = profile.querySelector('.profile__edit-button');
@@ -37,19 +38,28 @@ const popupShowImage = new PopupWithImage('.popup_type_show-image');
 popupShowImage.setEventListeners();
 // const buttonClosePopupShowImage = popupShowImage.querySelector('.popup__close-button');
 
-const createCard = (data, selector) => {
-  const card = new Card(data, selector);
-  const cardElement = card.createCard();
-  return cardElement;
-};
+// const createCard = (data, selector) => {
+//   const card = new Card(data, selector);
+//   const cardElement = card.createCard();
+//   return cardElement;
+// };
 
-const renderElements = (objectsArray, elementsList) => {
-  const htmlList = objectsArray.map(item => {
-    const cardElement = createCard(item, '#element');
+const elementsList = new Section({
+  items: initialCards,
+  renderer: (data) => {
+    const card = new Card(data, '#element');
+    const cardElement = card.createCard();
     return cardElement;
-  });
-  elementsList.append(...htmlList);
-};
+  }
+}, '.elements');
+
+// const renderElements = (objectsArray, elementsList) => {
+//   const htmlList = objectsArray.map(item => {
+//     const cardElement = createCard(item, '#element');
+//     return cardElement;
+//   });
+//   elementsList.append(...htmlList);
+// };
 
 const handleOpenPopupProfile = () => {
   profileFormValidator.clearFormFields();
@@ -104,4 +114,7 @@ popups.forEach(popup => popup.addEventListener('mousedown', event => {
 
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-renderElements(initialCards, elementsList);
+
+// renderElements(initialCards, elementsList);
+const htmlList = elementsList.renderItems();
+elementsList.addItem(...htmlList);
