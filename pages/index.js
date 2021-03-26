@@ -1,24 +1,20 @@
-import { initialCards, validationConfig } from '../utils/constants.js';
+import {
+  initialCards,
+  validationConfig,
+  buttonEditProfile,
+  buttonAddCard,
+  cardsContainer,
+  profileFormElement,
+  addCardFormElement,
+  nameProfileInput,
+  metierProfileInput
+} from '../utils/constants.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-
-const profile = document.querySelector('.profile');
-const buttonEditProfile = profile.querySelector('.profile__edit-button');
-const buttonAddCard = profile.querySelector('.profile__add-button');
-
-const profilePopup = document.querySelector('.popup_type_profile');
-const profileFormElement = profilePopup.querySelector('.popup__form');
-const nameProfileInput = profileFormElement.querySelector('.popup__input_type_name-profile');
-const metierProfileInput = profileFormElement.querySelector('.popup__input_type_metier-profile');
-
-const addCardPopup = document.querySelector('.popup_type_add-card');
-const addCardFormElement = addCardPopup.querySelector('.popup__form');
-
-const cardsContainer = document.querySelector('.elements');
 
 const createCard = (data) => {
   const card = new Card(data, '#element', (data) => {
