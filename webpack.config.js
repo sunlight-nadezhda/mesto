@@ -4,7 +4,7 @@ module.exports = {
   entry: { main: './src/pages/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main2.js',
+    filename: 'bundle.[name].js',
     publicPath: ''
   },
   mode: 'development',
@@ -13,5 +13,14 @@ module.exports = {
     compress: true,
     port: 8080,
     open: true
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: '/node_modules/'
+      }
+    ]
   }
-}
+};
