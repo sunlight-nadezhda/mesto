@@ -27,7 +27,10 @@ const createCard = (data) => {
 
 const elementsList = new Section({
   items: initialCards,
-  renderer: createCard
+  renderer: (obj) => {
+    const cardElement = createCard(obj);
+    elementsList.addItem(cardElement);
+  }
 }, '.elements');
 
 const popupShowImage = new PopupWithImage('.popup_type_show-image');
@@ -40,6 +43,7 @@ const popupProfile = new PopupWithForm('.popup_type_profile', (data) => {
     'input-metier-profile': metierValue
   } = data;
   userPofile.setUserInfo(nameValue, metierValue);
+  popupProfile.close();
 });
 
 const handleOpenPopupProfile = () => {
@@ -65,12 +69,12 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', (data) => {
   });
 
   cardsContainer.prepend(cardElement);
+  popupAddCard.close();
 });
 
 const addCardFormValidator = new FormValidator(validationConfig, addCardFormElement);
 
-const htmlList = elementsList.renderItems();
-htmlList.forEach(card => elementsList.addItem(card));
+elementsList.renderItems();
 
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
