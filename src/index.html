@@ -6,7 +6,6 @@
   <meta name="description" content="Проект с профилем и карточками интересных мест для посещения">
   <meta name="author" content="Надежда Малохатько">
   <title>Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
   <header class="header">
@@ -15,7 +14,7 @@
 
   <main>
     <section class="profile">
-      <img src="./images/avatar.png" alt="Аватарка" class="profile__avatar">
+      <img src="<%=require('./images/avatar.png')%>" alt="Аватарка" class="profile__avatar">
         <div class="profile__about">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__metier">Исследователь океана</p>
@@ -92,6 +91,5 @@
     </div>
   </div>
 
-  <script type="module" src="./pages/index.js"></script>
 </body>
 </html>
