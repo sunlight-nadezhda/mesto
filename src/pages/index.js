@@ -15,6 +15,7 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import './index.css';
 
 const createCard = (data) => {
   const card = new Card(data, '#element', (data) => {
