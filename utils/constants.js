@@ -38,7 +38,7 @@ export const buttonEditProfile = profile.querySelector('.profile__edit-button');
 export const buttonAddCard = profile.querySelector('.profile__add-button');
 
 const profilePopup = document.querySelector('.popup_type_profile');
-const profileFormElement = profilePopup.querySelector('.popup__form');
+export const profileFormElement = profilePopup.querySelector('.popup__form');
 export const nameProfileInput = profileFormElement.querySelector('.popup__input_type_name-profile');
 export const metierProfileInput = profileFormElement.querySelector('.popup__input_type_metier-profile');
 
