@@ -4,6 +4,7 @@
   height: 282px;
   display: block;
   filter: brightness(90%);
+  background-color: #fff;
 }
 
 .element__image:hover {
