@@ -29,6 +29,7 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
     nameProfileElement.textContent = result.name;
     metierProfileElement.textContent = result.about;
     avatarProfileElement.src = result.avatar;
+    userPofile.setUserInfo(result.name, result.about);
   });
 
 const createCard = (data) => {
