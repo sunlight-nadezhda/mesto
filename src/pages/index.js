@@ -1,5 +1,4 @@
 import {
-  initialCards,
   validationConfig,
   buttonEditProfile,
   nameProfileElement,
@@ -30,7 +29,6 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
     nameProfileElement.textContent = result.name;
     metierProfileElement.textContent = result.about;
     avatarProfileElement.src = result.avatar;
-    console.log(result);
   });
 
 const createCard = (data) => {
@@ -41,13 +39,23 @@ const createCard = (data) => {
   return cardElement;
 };
 
-const elementsList = new Section({
-  items: initialCards,
-  renderer: (obj) => {
-    const cardElement = createCard(obj);
-    elementsList.addItem(cardElement);
+fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
+  headers: {
+    authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f'
   }
-}, '.elements');
+})
+  .then(res => res.json())
+  .then((result) => {
+    const elementsList = new Section({
+      items: result,
+      renderer: (obj) => {
+        const cardElement = createCard(obj);
+        elementsList.addItem(cardElement);
+      }
+    }, '.elements');
+    elementsList.renderItems();
+    console.log(result);
+  });
 
 const popupShowImage = new PopupWithImage('.popup_type_show-image');
 
@@ -89,8 +97,6 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', (data) => {
 });
 
 const addCardFormValidator = new FormValidator(validationConfig, addCardFormElement);
-
-elementsList.renderItems();
 
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
