@@ -29,6 +29,7 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
     nameProfileElement.textContent = result.name;
     metierProfileElement.textContent = result.about;
     avatarProfileElement.src = result.avatar;
+
     userPofile.setUserInfo(result.name, result.about);
   });
 
@@ -66,6 +67,7 @@ const popupProfile = new PopupWithForm('.popup_type_profile', (data) => {
     'input-name-profile': nameValue,
     'input-metier-profile': metierValue
   } = data;
+
   fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
     method: 'PATCH',
     headers: {
@@ -76,10 +78,8 @@ const popupProfile = new PopupWithForm('.popup_type_profile', (data) => {
       name: nameValue,
       about: metierValue
     })
-  })
-  .then((result) => {
-    console.log(result);
   });
+
   userPofile.setUserInfo(nameValue, metierValue);
   popupProfile.close();
 });
@@ -100,6 +100,18 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', (data) => {
     'input-name-add-card': nameValue,
     'input-link-add-card': linkValue
   } = data;
+
+  fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
+    method: 'POST',
+    headers: {
+      authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: nameValue,
+      link: linkValue
+    })
+  });
 
   const cardElement = createCard({
     name: nameValue,
