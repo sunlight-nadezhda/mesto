@@ -2,6 +2,9 @@ import {
   initialCards,
   validationConfig,
   buttonEditProfile,
+  nameProfileElement,
+  metierProfileElement,
+  avatarProfileElement,
   buttonAddCard,
   cardsContainer,
   profileFormElement,
@@ -16,6 +19,19 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css';
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
+  headers: {
+    authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    nameProfileElement.textContent = result.name;
+    metierProfileElement.textContent = result.about;
+    avatarProfileElement.src = result.avatar;
+    console.log(result);
+  });
 
 const createCard = (data) => {
   const card = new Card(data, '#element', (data) => {
