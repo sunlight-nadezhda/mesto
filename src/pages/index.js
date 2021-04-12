@@ -33,11 +33,11 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
     userPofile.setUserInfo(result.name, result.about);
   });
 
-const createCard = (data) => {
+const createCard = (data, isOwner) => {
   const card = new Card(data, '#element', (data) => {
     popupShowImage.open(data);
   });
-  const cardElement = card.createCard();
+  const cardElement = card.createCard(isOwner);
   return cardElement;
 };
 
@@ -51,11 +51,14 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
     const elementsList = new Section({
       items: result,
       renderer: (obj) => {
-        const cardElement = createCard(obj);
+        const isOwner = obj.owner._id === 'a9f148dd3d5e2f4620ee62f5';
+        const cardElement = createCard(obj, isOwner);
         elementsList.addItem(cardElement);
       }
     }, '.elements');
     elementsList.renderItems();
+
+    console.log(result);
   });
 
 const popupShowImage = new PopupWithImage('.popup_type_show-image');

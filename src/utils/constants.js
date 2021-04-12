@@ -21,4 +21,6 @@ export const metierProfileInput = profileFormElement.querySelector('.popup__inpu
 const addCardPopup = document.querySelector('.popup_type_add-card');
 export const addCardFormElement = addCardPopup.querySelector('.popup__form');
 
+export const confirmPopup = document.querySelector('.popup_type_confirm');
+
 export const cardsContainer = document.querySelector('.elements');

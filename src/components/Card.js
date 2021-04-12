@@ -1,23 +1,14 @@
+import Popup from './Popup.js';
 export default class Card {
   constructor(data, selector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes;
+    this._likes = data.likes ?? [];
     this._selector = selector;
     this._handleCardClick = handleCardClick;
   }
 
-  _getTemplate() {
-    const cardElement = document
-      .querySelector(this._selector)
-      .content
-      .querySelector('.element')
-      .cloneNode(true);
-
-    return cardElement;
-  }
-
-  createCard() {
+  createCard(isOwner) {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.element__like-button');
     this._trashButton = this._element.querySelector('.element__trash');
@@ -31,7 +22,19 @@ export default class Card {
     elementTitle.textContent = this._name;
     elementLikeCounter.textContent = this._likes.length;
 
+    if (!isOwner) this._trashButton.style.display = 'none';
+
     return this._element;
+  }
+
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(this._selector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true);
+
+    return cardElement;
   }
 
   _handleChangeLike() {
@@ -39,7 +42,10 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    this._element.remove();
+    const confirmPopup = new Popup('.popup_type_confirm');
+    confirmPopup.open();
+    confirmPopup.setEventListeners();
+    // this._element.remove();
   }
 
   _handleShowImage() {

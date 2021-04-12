@@ -1,0 +1,10 @@
+.popup__confirm-button {
+  min-width: 358px;
+  min-height: 50px;
+  margin-top: 38px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+}
