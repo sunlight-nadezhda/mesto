@@ -36,6 +36,9 @@ export const validationConfig = {
 const profile = document.querySelector('.profile');
 export const buttonEditProfile = profile.querySelector('.profile__edit-button');
 export const buttonAddCard = profile.querySelector('.profile__add-button');
+export const nameProfileElement = profile.querySelector('.profile__name');
+export const metierProfileElement = profile.querySelector('.profile__metier');
+export const avatarProfileElement = profile.querySelector('.profile__avatar');
 
 const profilePopup = document.querySelector('.popup_type_profile');
 export const profileFormElement = profilePopup.querySelector('.popup__form');
