@@ -4,10 +4,12 @@ import {
   nameProfileElement,
   metierProfileElement,
   avatarProfileElement,
+  avatarEditElement,
   buttonAddCard,
   cardsContainer,
   profileFormElement,
   addCardFormElement,
+  editAvatarFormElement,
   nameProfileInput,
   metierProfileInput
 } from '../utils/constants.js';
@@ -60,6 +62,34 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
 
 const popupShowImage = new PopupWithImage('.popup_type_show-image');
 
+const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', (data) => {
+  const {
+    'input-link-edit-avatar': linkValue
+  } = data;
+
+  fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me/avatar', {
+    method: 'PATCH',
+    headers: {
+      authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      avatar: linkValue
+    })
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(result => {
+    avatarProfileElement.src = linkValue;
+  });
+
+  popupEditAvatar.close();
+});
+
+const editAvatarFormValidator = new FormValidator(validationConfig, editAvatarFormElement);
+editAvatarFormValidator.enableValidation();
+
 const userPofile = new UserInfo('.profile__name', '.profile__metier');
 
 const popupProfile = new PopupWithForm('.popup_type_profile', (data) => {
@@ -94,6 +124,7 @@ const handleOpenPopupProfile = () => {
 }
 
 const profileFormValidator = new FormValidator(validationConfig, profileFormElement);
+profileFormValidator.enableValidation();
 
 const popupAddCard = new PopupWithForm('.popup_type_add-card', (data) => {
   const {
@@ -124,11 +155,14 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', (data) => {
 });
 
 const addCardFormValidator = new FormValidator(validationConfig, addCardFormElement);
-
-profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 buttonEditProfile.addEventListener('click', handleOpenPopupProfile);
+
+avatarEditElement.addEventListener('click', () => {
+  editAvatarFormValidator.clearFormFields();
+  popupEditAvatar.open();
+});
 
 buttonAddCard.addEventListener('click', () => {
   addCardFormValidator.clearFormFields();
@@ -138,3 +172,4 @@ buttonAddCard.addEventListener('click', () => {
 popupShowImage.setEventListeners();
 popupProfile.setEventListeners();
 popupAddCard.setEventListeners();
+popupEditAvatar.setEventListeners();

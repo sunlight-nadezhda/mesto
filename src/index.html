@@ -14,12 +14,14 @@
 
   <main>
     <section class="profile">
-      <img src="<%=require('./images/avatar.png')%>" alt="Аватарка" class="profile__avatar">
-        <div class="profile__about">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <p class="profile__metier">Исследователь океана</p>
-          <button type="button" aria-label="Редактировать" class="button profile__edit-button"></button>
-        </div>
+      <div class="profile__avatar-edit">
+        <img src="<%=require('./images/avatar.png')%>" alt="Аватарка" class="profile__avatar">
+      </div>
+      <div class="profile__about">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <p class="profile__metier">Исследователь океана</p>
+        <button type="button" aria-label="Редактировать" class="button profile__edit-button"></button>
+      </div>
       <button type="button" aria-label="Добавить" class="button profile__add-button"></button>
     </section>
 
@@ -99,6 +101,20 @@
       <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
       <h2 class="popup__title">Вы уверены?</h2>
       <button type="button" class="popup__confirm-button">Да</button>
+    </div>
+  </div>
+
+  <div class="overlay popup popup_type_edit-avatar">
+    <div class="popup__container popup__container_type_edit-avatar">
+      <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" name="edit-avatar" novalidate>
+        <label class="popup__form-field">
+          <input type="url" name="input-link-edit-avatar" placeholder="Ссылка на аватарку" class="popup__input popup__input_type_link-avatar" id="input-link-edit-avatar" required>
+          <span class="popup__input-error input-link-edit-avatar-error"></span>
+        </label>
+        <button type="submit" class="popup__save-button popup__save-button_inactive" disabled>Создать</button>
+      </form>
     </div>
   </div>
 
