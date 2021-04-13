@@ -56,8 +56,6 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
       }
     }, '.elements');
     elementsList.renderItems();
-
-    console.log(result);
   });
 
 const popupShowImage = new PopupWithImage('.popup_type_show-image');
