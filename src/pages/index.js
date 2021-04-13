@@ -1,4 +1,5 @@
 import {
+  createCard,
   validationConfig,
   buttonEditProfile,
   nameProfileElement,
@@ -14,12 +15,34 @@ import {
   metierProfileInput
 } from '../utils/constants.js';
 import Section from '../components/Section.js';
-import Card from '../components/Card.js';
+// import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 import './index.css';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
+  headers: {
+    authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f',
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getInitialCards()
+  .then((result) => {
+    const elementsList = new Section({
+      items: result,
+      renderer: (obj) => {
+        const cardElement = createCard(obj);
+        elementsList.addItem(cardElement);
+      }
+    }, '.elements');
+    elementsList.renderItems();
+  })
+  .catch(err => console.log(err));
 
 fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
   headers: {
@@ -35,30 +58,30 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
     userPofile.setUserInfo(result.name, result.about);
   });
 
-const createCard = (data) => {
-  const card = new Card(data, '#element', (data) => {
-    popupShowImage.open(data);
-  });
-  const cardElement = card.createCard();
-  return cardElement;
-};
+// const createCard = (data) => {
+//   const card = new Card(data, '#element', (data) => {
+//     popupShowImage.open(data);
+//   });
+//   const cardElement = card.createCard();
+//   return cardElement;
+// };
 
-fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
-  headers: {
-    authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    const elementsList = new Section({
-      items: result,
-      renderer: (obj) => {
-        const cardElement = createCard(obj);
-        elementsList.addItem(cardElement);
-      }
-    }, '.elements');
-    elementsList.renderItems();
-  });
+// fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
+//   headers: {
+//     authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f'
+//   }
+// })
+//   .then(res => res.json())
+  // .then((result) => {
+  //   const elementsList = new Section({
+  //     items: result,
+  //     renderer: (obj) => {
+  //       const cardElement = createCard(obj);
+  //       elementsList.addItem(cardElement);
+  //     }
+  //   }, '.elements');
+  //   elementsList.renderItems();
+  // });
 
 const popupShowImage = new PopupWithImage('.popup_type_show-image');
 
