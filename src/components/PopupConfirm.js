@@ -12,7 +12,7 @@ export default class PopupConfirm extends Popup {
         method: 'DELETE',
         headers: {
           authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f'
-        },
+        }
       });
       cardElement.remove();
       this.close(this._popup);
