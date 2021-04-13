@@ -1,4 +1,4 @@
-import Popup from './Popup.js';
+import PopupConfirm from './PopupConfirm.js';
 export default class Card {
   constructor(data, selector, handleCardClick) {
     this._name = data.name;
@@ -6,9 +6,11 @@ export default class Card {
     this._likes = data.likes ?? [];
     this._selector = selector;
     this._handleCardClick = handleCardClick;
+    this._isOwner = data.owner._id === 'a9f148dd3d5e2f4620ee62f5';
+    this._cardId = data._id;
   }
 
-  createCard(isOwner) {
+  createCard() {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.element__like-button');
     this._trashButton = this._element.querySelector('.element__trash');
@@ -22,7 +24,7 @@ export default class Card {
     elementTitle.textContent = this._name;
     elementLikeCounter.textContent = this._likes.length;
 
-    if (!isOwner) this._trashButton.style.display = 'none';
+    if (!this._isOwner) this._trashButton.style.display = 'none';
 
     return this._element;
   }
@@ -42,9 +44,9 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    const confirmPopup = new Popup('.popup_type_confirm');
+    const confirmPopup = new PopupConfirm('.popup_type_confirm');
     confirmPopup.open();
-    confirmPopup.setEventListeners();
+    confirmPopup.setEventListeners(this._cardId, this._element);
     // this._element.remove();
   }
 
