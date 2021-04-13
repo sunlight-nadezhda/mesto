@@ -7,6 +7,7 @@
   position: absolute;
   top: 18px;
   right: 15px;
+  outline: none;
 }
 
 .element__trash:hover {

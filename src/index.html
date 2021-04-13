@@ -40,7 +40,10 @@
       <button type="button" aria-label="Удалить" class="button element__trash"></button>
       <div class="element__info">
         <h2 class="element__title"></h2>
-        <button type="button" aria-label="Лайкнуть" class="button element__like-button"></button>
+        <div class="element__likes">
+          <button type="button" aria-label="Лайкнуть" class="button element__like-button"></button>
+          <span class="element__like-counter" aria-label="Количество лайков"></span>
+        </div>
       </div>
     </li>
   </template>
@@ -88,6 +91,14 @@
         <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз" class="figure__image">
         <figcaption class="figure__caption">Архыз</figcaption>
       </figure>
+    </div>
+  </div>
+
+  <div class="overlay popup popup_type_confirm">
+    <div class="popup__container popup__container_type_confirm">
+      <button type="button" aria-label="Закрыть" class="button popup__close-button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button type="button" class="popup__confirm-button">Да</button>
     </div>
   </div>
 
