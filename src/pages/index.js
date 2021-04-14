@@ -37,21 +37,30 @@ const createCard = (data) => {
   const card = new Card(
     data,
     '#element',
-    (cardInfo) => {
-      popupShowImage.open(cardInfo);
-    },
-    (cardIdentifier) => {
-      const popupConfirm = new PopupWithForm('.popup_type_confirm', (data) => {
-        api.deleteCard(cardIdentifier.cardId)
-          .catch(err => console.log(err));
-          cardIdentifier.cardElement.remove();
-        popupConfirm.close();
-      });
-      popupConfirm.open();
-      popupConfirm.setEventListeners();
-    },
-    (cardId, cardLikes) => {
-      return api.addLike(cardId, cardLikes);
+
+    {
+      handleCardClick: (cardInfo) => {
+        popupShowImage.open(cardInfo);
+      },
+
+      handleTrashClick: (cardIdentifier) => {
+        const popupConfirm = new PopupWithForm('.popup_type_confirm', (data) => {
+          api.deleteCard(cardIdentifier.cardId)
+            .catch(err => console.log(err));
+            cardIdentifier.cardElement.remove();
+          popupConfirm.close();
+        });
+        popupConfirm.open();
+        popupConfirm.setEventListeners();
+      },
+
+      addLike: (cardId, cardLikes) => {
+        return api.addLike(cardId, cardLikes);
+      },
+
+      deleteLike: (cardId) => {
+        return api.deleteLike(cardId);
+      }
     }
   );
 

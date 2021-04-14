@@ -112,6 +112,21 @@ export default class Api {
         return Promise.reject(`Ошибка ${response.status}`);
       });
   }
+
+  deleteLike(cardId) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._headers.authorization
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      return Promise.reject(`Ошибка ${response.status}`);
+    });
+  }
 }
 
 
