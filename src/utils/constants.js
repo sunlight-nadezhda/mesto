@@ -1,19 +1,9 @@
-import Card from '../components/Card.js';
-
 export const validationConfig = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
-};
-
-export const createCard = (data) => {
-  const card = new Card(data, '#element', (data) => {
-    popupShowImage.open(data);
-  });
-  const cardElement = card.createCard();
-  return cardElement;
 };
 
 const profile = document.querySelector('.profile');

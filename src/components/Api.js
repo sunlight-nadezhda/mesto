@@ -1,20 +1,3 @@
-import {
-  createCard,
-  validationConfig,
-  buttonEditProfile,
-  nameProfileElement,
-  metierProfileElement,
-  avatarProfileElement,
-  avatarEditElement,
-  buttonAddCard,
-  cardsContainer,
-  profileFormElement,
-  addCardFormElement,
-  editAvatarFormElement,
-  nameProfileInput,
-  metierProfileInput
-} from '../utils/constants.js';
-
 export default class Api {
   constructor(options) {
     this._url = options.baseUrl;
@@ -23,7 +6,9 @@ export default class Api {
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
-      headers: this._headers
+      headers: {
+        authorization: this._headers.authorization
+      }
     })
       .then(response => {
         if (response.ok) {
@@ -33,7 +18,78 @@ export default class Api {
       });
   }
 
-  // другие методы работы с API
+  getUserInfo() {
+    return fetch(`${this._url}/users/me`, {
+      headers: {
+        authorization: this._headers.authorization
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(`Ошибка ${response.status}`);
+      });
+  }
+
+  sendLinkAvatar(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(`Ошибка ${response.status}`);
+      });
+  }
+
+  sendUserInfo(data) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(`Ошибка ${response.status}`);
+      });
+  }
+
+  addCard(data) {
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(`Ошибка ${response.status}`);
+      });
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._headers.authorization
+      }
+    });
+  }
 }
 
 

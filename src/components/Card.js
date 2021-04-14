@@ -92,9 +92,9 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    const confirmPopup = new PopupConfirm('.popup_type_confirm');
-    confirmPopup.open();
-    confirmPopup.setEventListeners(this._cardId, this._element);
+    // const confirmPopup = new PopupConfirm('.popup_type_confirm');
+    // confirmPopup.open();
+    // confirmPopup.setEventListeners(this._cardId, this._element);
   }
 
   _handleShowImage() {
