@@ -1,6 +1,5 @@
-import PopupConfirm from './PopupConfirm.js';
 export default class Card {
-  constructor(data, selector, handleCardClick) {
+  constructor(data, selector, functionArgs) {
     this._myId = 'a9f148dd3d5e2f4620ee62f5';
     this._name = data.name;
     this._link = data.link;
@@ -10,7 +9,10 @@ export default class Card {
     this._isOwner = data.owner._id === this._myId;
     this._cardId = data._id;
     this._selector = selector;
-    this._handleCardClick = handleCardClick;
+    this._handleCardClick = functionArgs.handleCardClick;
+    this._handleTrashClick = functionArgs.handleTrashClick;
+    this._addLike = functionArgs.addLike;
+    this._deleteLike = functionArgs.deleteLike;
   }
 
   createCard() {
@@ -58,43 +60,28 @@ export default class Card {
 
   _handleAddLike() {
     this._likes.push(this._owner);
-    fetch(`https://mesto.nomoreparties.co/v1/cohort-22/cards/likes/${this._cardId}`, {
-      method: 'PUT',
-      headers: {
-        authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({likes: this._likes})
-    })
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      this._likes = result.likes;
-      this._elementLikeCounter.textContent = this._likes.length;
-    });
-  }
-
-  _handleDeleteLike() {
-    fetch(`https://mesto.nomoreparties.co/v1/cohort-22/cards/likes/${this._cardId}`, {
-        method: 'DELETE',
-        headers: {
-          authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f'
-        }
-      })
-      .then(response => {
-        return response.json();
-      })
+    this._addLike(this._cardId, this._likes)
       .then(result => {
         this._likes = result.likes;
         this._elementLikeCounter.textContent = this._likes.length;
-      });
+      })
+      .catch(err => console.log(err));
+  }
+
+  _handleDeleteLike() {
+    this._deleteLike(this._cardId)
+      .then(result => {
+        this._likes = result.likes;
+        this._elementLikeCounter.textContent = this._likes.length;
+      })
+      .catch(err => console.log(err));
   }
 
   _handleDeleteCard() {
-    const confirmPopup = new PopupConfirm('.popup_type_confirm');
-    confirmPopup.open();
-    confirmPopup.setEventListeners(this._cardId, this._element);
+    this._handleTrashClick({
+      cardId: this._cardId,
+      cardElement: this._element
+    });
   }
 
   _handleShowImage() {
