@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, selector, handleCardClick, handleTrashClick) {
+  constructor(data, selector, handleCardClick, handleTrashClick, addLike) {
     this._myId = 'a9f148dd3d5e2f4620ee62f5';
     this._name = data.name;
     this._link = data.link;
@@ -11,6 +11,7 @@ export default class Card {
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._handleTrashClick = handleTrashClick;
+    this._addLike = addLike;
   }
 
   createCard() {
@@ -58,21 +59,11 @@ export default class Card {
 
   _handleAddLike() {
     this._likes.push(this._owner);
-    fetch(`https://mesto.nomoreparties.co/v1/cohort-22/cards/likes/${this._cardId}`, {
-      method: 'PUT',
-      headers: {
-        authorization: '1e5f7c98-03ad-4c6e-8333-1ab219b8293f',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({likes: this._likes})
-    })
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      this._likes = result.likes;
-      this._elementLikeCounter.textContent = this._likes.length;
-    });
+    this._addLike(this._cardId, this._likes)
+      .then(result => {
+        this._likes = result.likes;
+        this._elementLikeCounter.textContent = this._likes.length;
+      });
   }
 
   _handleDeleteLike() {

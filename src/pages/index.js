@@ -49,6 +49,9 @@ const createCard = (data) => {
       });
       popupConfirm.open();
       popupConfirm.setEventListeners();
+    },
+    (cardId, cardLikes) => {
+      return api.addLike(cardId, cardLikes);
     }
   );
 

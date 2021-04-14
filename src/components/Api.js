@@ -96,6 +96,22 @@ export default class Api {
       return Promise.reject(`Ошибка ${response.status}`);
     });
   }
+
+  addLike(cardId, cardLikes) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers,
+      body: JSON.stringify({
+        likes: cardLikes
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(`Ошибка ${response.status}`);
+      });
+  }
 }
 
 
