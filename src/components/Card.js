@@ -64,15 +64,17 @@ export default class Card {
       .then(result => {
         this._likes = result.likes;
         this._elementLikeCounter.textContent = this._likes.length;
-      });
+      })
+      .catch(err => console.log(err));
   }
 
   _handleDeleteLike() {
-      this._deleteLike(this._cardId)
+    this._deleteLike(this._cardId)
       .then(result => {
         this._likes = result.likes;
         this._elementLikeCounter.textContent = this._likes.length;
-      });
+      })
+      .catch(err => console.log(err));
   }
 
   _handleDeleteCard() {

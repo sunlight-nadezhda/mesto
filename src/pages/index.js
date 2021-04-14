@@ -37,7 +37,6 @@ const createCard = (data) => {
   const card = new Card(
     data,
     '#element',
-
     {
       handleCardClick: (cardInfo) => {
         popupShowImage.open(cardInfo);
@@ -98,10 +97,17 @@ const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', (data) => {
     'input-link-edit-avatar': linkValue
   } = data;
 
+  popupEditAvatar.setLoadingButton();
   api.sendLinkAvatar(linkValue)
-    .catch(err => console.log(err));
-  avatarProfileElement.src = linkValue;
-  popupEditAvatar.close();
+    .then(() => {
+      avatarProfileElement.src = linkValue;
+      popupEditAvatar.resetButton();
+      popupEditAvatar.close();
+    })
+    .catch(err => {
+      console.log(err);
+      popupEditAvatar.close();
+    });
 });
 
 const editAvatarFormValidator = new FormValidator(validationConfig, editAvatarFormElement);
@@ -113,14 +119,20 @@ const popupProfile = new PopupWithForm('.popup_type_profile', (data) => {
     'input-metier-profile': metierValue
   } = data;
 
+  popupProfile.setLoadingButton();
   api.sendUserInfo({
     name: nameValue,
     about: metierValue
   })
-    .catch(err => console.log(err));
-
-  userPofile.setUserInfo(nameValue, metierValue);
-  popupProfile.close();
+    .then(() => {
+      userPofile.setUserInfo(nameValue, metierValue);
+      popupProfile.resetButton();
+      popupProfile.close();
+    })
+    .catch(err => {
+      console.log(err);
+      popupProfile.close();
+    });
 });
 
 const handleOpenPopupProfile = () => {
@@ -141,6 +153,7 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', (data) => {
     'input-link-add-card': linkValue
   } = data;
 
+  popupAddCard.setLoadingButton();
   api.addCard({
     name: nameValue,
     link: linkValue
@@ -148,10 +161,13 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', (data) => {
     .then(result => {
       const cardElement = createCard(result);
       cardsContainer.prepend(cardElement);
+      popupAddCard.resetButton();
+      popupAddCard.close();
     })
-    .catch(err => console.log(err));
-
-  popupAddCard.close();
+    .catch(err => {
+      console.log(err);
+      popupAddCard.close();
+    });
 });
 
 const addCardFormValidator = new FormValidator(validationConfig, addCardFormElement);
