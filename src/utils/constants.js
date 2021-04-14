@@ -1,30 +1,3 @@
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 export const validationConfig = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
@@ -36,6 +9,10 @@ export const validationConfig = {
 const profile = document.querySelector('.profile');
 export const buttonEditProfile = profile.querySelector('.profile__edit-button');
 export const buttonAddCard = profile.querySelector('.profile__add-button');
+export const nameProfileElement = profile.querySelector('.profile__name');
+export const metierProfileElement = profile.querySelector('.profile__metier');
+export const avatarProfileElement = profile.querySelector('.profile__avatar');
+export const avatarEditElement = profile.querySelector('.profile__avatar-edit');
 
 const profilePopup = document.querySelector('.popup_type_profile');
 export const profileFormElement = profilePopup.querySelector('.popup__form');
@@ -44,5 +21,10 @@ export const metierProfileInput = profileFormElement.querySelector('.popup__inpu
 
 const addCardPopup = document.querySelector('.popup_type_add-card');
 export const addCardFormElement = addCardPopup.querySelector('.popup__form');
+
+const editAvatarPopup = document.querySelector('.popup_type_edit-avatar');
+export const editAvatarFormElement = editAvatarPopup.querySelector('.popup__form');
+
+export const confirmPopup = document.querySelector('.popup_type_confirm');
 
 export const cardsContainer = document.querySelector('.elements');
