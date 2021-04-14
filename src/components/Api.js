@@ -88,6 +88,12 @@ export default class Api {
       headers: {
         authorization: this._headers.authorization
       }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      return Promise.reject(`Ошибка ${response.status}`);
     });
   }
 }

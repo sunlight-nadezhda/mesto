@@ -31,21 +31,27 @@ const api = new Api({
   }
 });
 
+const popupShowImage = new PopupWithImage('.popup_type_show-image');
+
 const createCard = (data) => {
-  const popupConfirm = new PopupWithForm('.popup_type_confirm', ({cardId, cardElement}) => {
-    api.deleteCard(cardId)
-      .catch(err => console.log(err));
-    cardElement.remove();
-    popupConfirm.close();
-  });
+  const card = new Card(
+    data,
+    '#element',
+    (cardInfo) => {
+      popupShowImage.open(cardInfo);
+    },
+    (cardIdentifier) => {
+      const popupConfirm = new PopupWithForm('.popup_type_confirm', (data) => {
+        api.deleteCard(cardIdentifier.cardId)
+          .catch(err => console.log(err));
+          cardIdentifier.cardElement.remove();
+        popupConfirm.close();
+      });
+      popupConfirm.open();
+      popupConfirm.setEventListeners();
+    }
+  );
 
-  // const confirmPopup = new PopupConfirm('.popup_type_confirm');
-  //     confirmPopup.open();
-  //     confirmPopup.setEventListeners(this._cardId, this._element);
-
-  const card = new Card(data, '#element', (data) => {
-    popupShowImage.open(data);
-  });
   const cardElement = card.createCard();
   return cardElement;
 };
@@ -62,8 +68,6 @@ api.getInitialCards()
     elementsList.renderItems();
   })
   .catch(err => console.log(err));
-
-const popupShowImage = new PopupWithImage('.popup_type_show-image');
 
 const userPofile = new UserInfo('.profile__name', '.profile__metier');
 

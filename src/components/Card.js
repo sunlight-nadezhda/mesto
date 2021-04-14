@@ -1,6 +1,5 @@
-import PopupConfirm from './PopupConfirm.js';
 export default class Card {
-  constructor(data, selector, handleCardClick) {
+  constructor(data, selector, handleCardClick, handleTrashClick) {
     this._myId = 'a9f148dd3d5e2f4620ee62f5';
     this._name = data.name;
     this._link = data.link;
@@ -11,6 +10,7 @@ export default class Card {
     this._cardId = data._id;
     this._selector = selector;
     this._handleCardClick = handleCardClick;
+    this._handleTrashClick = handleTrashClick;
   }
 
   createCard() {
@@ -92,9 +92,10 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    // const confirmPopup = new PopupConfirm('.popup_type_confirm');
-    // confirmPopup.open();
-    // confirmPopup.setEventListeners(this._cardId, this._element);
+    this._handleTrashClick({
+      cardId: this._cardId,
+      cardElement: this._element
+    });
   }
 
   _handleShowImage() {
