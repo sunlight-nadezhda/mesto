@@ -99,12 +99,12 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 const popupEditAvatar = new PopupWithForm(".popup_type_edit-avatar", (data) => {
   const { "input-link-edit-avatar": linkValue } = data;
 
-  popupEditAvatar.setLoadingButton();
+  popupEditAvatar.renderLoading(false);
   api
     .sendLinkAvatar(linkValue)
     .then(() => {
       avatarProfileElement.src = linkValue;
-      popupEditAvatar.resetButton();
+      popupEditAvatar.renderLoading(true);
       popupEditAvatar.close();
     })
     .catch((err) => {
@@ -124,7 +124,7 @@ const popupProfile = new PopupWithForm(".popup_type_profile", (data) => {
     "input-metier-profile": metierValue,
   } = data;
 
-  popupProfile.setLoadingButton();
+  popupProfile.renderLoading(false);
   api
     .sendUserInfo({
       name: nameValue,
@@ -132,7 +132,7 @@ const popupProfile = new PopupWithForm(".popup_type_profile", (data) => {
     })
     .then(() => {
       userPofile.setUserInfo(nameValue, metierValue);
-      popupProfile.resetButton();
+      popupProfile.renderLoading(true);
       popupProfile.close();
     })
     .catch((err) => {
@@ -161,7 +161,7 @@ const popupAddCard = new PopupWithForm(".popup_type_add-card", (data) => {
     "input-link-add-card": linkValue,
   } = data;
 
-  popupAddCard.setLoadingButton();
+  popupAddCard.renderLoading(false);
   api
     .addCard({
       name: nameValue,
@@ -171,7 +171,7 @@ const popupAddCard = new PopupWithForm(".popup_type_add-card", (data) => {
       const cardsContainer = new Section({}, '.elements');
       const cardElement = createCard(newCardInfo, true);
       cardsContainer.addItem(cardElement, false);
-      popupAddCard.resetButton();
+      popupAddCard.renderLoading(true);
       popupAddCard.close();
     })
     .catch((err) => {
