@@ -1,12 +1,10 @@
 export default class Card {
   constructor(data, isOwner, selector, functionArgs) {
-    // this._myId = userId;
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._isLiked = this._likes.some(item => item._id === this._myId);
     this._owner = data.owner;
-    // this._isOwner = data.owner._id === this._myId;
     this._isOwner = isOwner;
     this._cardId = data._id;
     this._selector = selector;

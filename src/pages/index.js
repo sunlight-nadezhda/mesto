@@ -1,12 +1,8 @@
 import {
   validationConfig,
   buttonEditProfile,
-  // nameProfileElement,
-  // metierProfileElement,
-  // avatarProfileElement,
   avatarEditElement,
   buttonAddCard,
-  // cardsContainer,
   profileFormElement,
   addCardFormElement,
   editAvatarFormElement,
@@ -172,21 +168,11 @@ const popupAddCard = new PopupWithForm(".popup_type_add-card", (data) => {
       link: linkValue,
     })
     .then((newCardInfo) => {
-      const cardsContainer = new Section(
-        {
-          // items: [newCardInfo],
-          // renderer: (cardInfo) => {
-          //   const cardElement = createCard(cardInfo, true);
-          //   cardsContainer.addItem(cardElement);
-          // },
-        },
-        '.elements'
-      );
+      const cardsContainer = new Section({}, '.elements');
       const cardElement = createCard(newCardInfo, true);
       cardsContainer.addItem(cardElement, false);
       popupAddCard.resetButton();
       popupAddCard.close();
-      console.log(newCardInfo);
     })
     .catch((err) => {
       console.log(err);
