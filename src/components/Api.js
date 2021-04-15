@@ -10,12 +10,7 @@ export default class Api {
         authorization: this._headers.authorization
       }
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(`Ошибка ${response.status}`);
-      });
+      .then(this._getResponseData);
   }
 
   getUserInfo() {
@@ -24,12 +19,7 @@ export default class Api {
         authorization: this._headers.authorization
       }
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(`Ошибка ${response.status}`);
-      });
+      .then(this._getResponseData);
   }
 
   sendLinkAvatar(data) {
@@ -40,12 +30,7 @@ export default class Api {
         avatar: data
       })
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(`Ошибка ${response.status}`);
-      });
+      .then(this._getResponseData);
   }
 
   sendUserInfo(data) {
@@ -57,12 +42,7 @@ export default class Api {
         about: data.about
       })
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(`Ошибка ${response.status}`);
-      });
+      .then(this._getResponseData);
   }
 
   addCard(data) {
@@ -74,12 +54,7 @@ export default class Api {
         link: data.link
       })
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(`Ошибка ${response.status}`);
-      });
+      .then(this._getResponseData);
   }
 
   deleteCard(cardId) {
@@ -89,12 +64,7 @@ export default class Api {
         authorization: this._headers.authorization
       }
     })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      return Promise.reject(`Ошибка ${response.status}`);
-    });
+    .then(this._getResponseData);
   }
 
   addLike(cardId, cardLikes) {
@@ -105,12 +75,7 @@ export default class Api {
         likes: cardLikes
       })
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(`Ошибка ${response.status}`);
-      });
+      .then(this._getResponseData);
   }
 
   deleteLike(cardId) {
@@ -120,12 +85,14 @@ export default class Api {
         authorization: this._headers.authorization
       }
     })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      return Promise.reject(`Ошибка ${response.status}`);
-    });
+    .then(this._getResponseData);
+  }
+
+  _getResponseData(response) {
+    if (response.ok) {
+      return response.json();
+    }
+    return Promise.reject(new Error(`Ошибка ${response.status}`));
   }
 }
 

@@ -18,14 +18,14 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  setLoadingButton() {
-    this._buttonSubmit.textContent = 'Сохранение...';
-    this._buttonSubmit.setAttribute('disabled', true);
-  }
-
-  resetButton() {
-    this._buttonSubmit.textContent = this._buttonValue;
-    this._buttonSubmit.removeAttribute('disabled');
+  renderLoading(isAvailable)  {
+    if (isAvailable) {
+      this._buttonSubmit.textContent = this._buttonValue;
+      this._buttonSubmit.removeAttribute('disabled');
+    } else {
+      this._buttonSubmit.textContent = 'Сохранение...';
+      this._buttonSubmit.setAttribute('disabled', true);
+    }
   }
 
   close() {

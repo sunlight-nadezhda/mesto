@@ -7,7 +7,7 @@ module.exports = {
   entry: { main: './src/pages/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
+    filename: '[name].[contenthash].js',
     publicPath: ''
   },
   mode: 'development',
@@ -20,12 +20,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js$/i,
         use: 'babel-loader',
         exclude: '/node_modules/'
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, {
           loader: 'css-loader',
           options: { importLoaders: 1 }
@@ -33,8 +33,17 @@ module.exports = {
         'postcss-loader']
       },
       {
-        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
-        type: 'asset/resource'
+        test: /\.(png|svg|jp(e)?g|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name].[contenthash][ext]',
+        }
+      }, {
+        test: /\.(woff(2)?|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'vendor/[name].[contenthash][ext]',
+        }
       }
     ]
   },
@@ -43,6 +52,8 @@ module.exports = {
       template: './src/index.html'
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    })
   ]
 };
