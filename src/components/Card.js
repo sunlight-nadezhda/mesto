@@ -1,11 +1,12 @@
 export default class Card {
-  constructor(data, isOwner, selector, functionArgs) {
+  constructor(data, userId, selector, functionArgs) {
+    this._myId = userId;
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._isLiked = this._likes.some(item => item._id === this._myId);
     this._owner = data.owner;
-    this._isOwner = isOwner;
+    this._isOwner = data.owner._id === this._myId;
     this._cardId = data._id;
     this._selector = selector;
     this._handleCardClick = functionArgs.handleCardClick;
@@ -26,7 +27,7 @@ export default class Card {
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
     elementTitle.textContent = this._name;
-    this._elementLikeCounter.textContent = this._likes.length;
+    this._updateNumberLikes();
 
     if (!this._isOwner) this._trashButton.style.display = 'none';
 
@@ -47,6 +48,10 @@ export default class Card {
     return cardElement;
   }
 
+  _updateNumberLikes() {
+    this._elementLikeCounter.textContent = this._likes.length;
+  }
+
   _handleChangeLike() {
     this._likeButton.classList.toggle('element__like-button_active');
     this._isLiked = !this._isLiked;
@@ -62,7 +67,7 @@ export default class Card {
     this._addLike(this._cardId, this._likes)
       .then(result => {
         this._likes = result.likes;
-        this._elementLikeCounter.textContent = this._likes.length;
+        this._updateNumberLikes();
       })
       .catch(err => {
         console.log(err);
@@ -73,7 +78,7 @@ export default class Card {
     this._deleteLike(this._cardId)
       .then(result => {
         this._likes = result.likes;
-        this._elementLikeCounter.textContent = this._likes.length;
+        this._updateNumberLikes();
       })
       .catch(err => {
         console.log(err);

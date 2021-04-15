@@ -29,8 +29,8 @@ const api = new Api({
 
 const popupShowImage = new PopupWithImage(".popup_type_show-image");
 
-const createCard = (data, isOwner) => {
-  const card = new Card(data, isOwner, "#element", {
+const createCard = (data, userId) => {
+  const card = new Card(data, userId, "#element", {
     handleCardClick: (cardInfo) => {
       popupShowImage.open(cardInfo);
     },
@@ -65,9 +65,9 @@ const createCard = (data, isOwner) => {
 };
 
 const userPofile = new UserInfo(
-  ".profile__name",
-  ".profile__metier",
-  ".profile__avatar"
+  '.profile__name',
+  '.profile__metier',
+  '.profile__avatar'
 );
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -81,8 +81,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       {
         items: initialCards,
         renderer: (cardInfo) => {
-          const isOwner = cardInfo.owner._id === userId;
-          const cardElement = createCard(cardInfo, isOwner);
+          const cardElement = createCard(cardInfo, userId);
           elementsList.addItem(cardElement);
         },
       },
@@ -168,8 +167,9 @@ const popupAddCard = new PopupWithForm(".popup_type_add-card", (data) => {
       link: linkValue,
     })
     .then((newCardInfo) => {
+      const userId = newCardInfo.owner._id;
       const cardsContainer = new Section({}, '.elements');
-      const cardElement = createCard(newCardInfo, true);
+      const cardElement = createCard(newCardInfo, userId);
       cardsContainer.addItem(cardElement, false);
       popupAddCard.renderLoading(true);
       popupAddCard.close();
