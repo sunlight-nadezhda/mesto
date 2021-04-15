@@ -45,9 +45,11 @@ const createCard = (data) => {
       handleTrashClick: (cardIdentifier) => {
         const popupConfirm = new PopupWithForm('.popup_type_confirm', (data) => {
           api.deleteCard(cardIdentifier.cardId)
+            .then(() => {
+              cardIdentifier.cardElement.remove();
+              popupConfirm.close();
+            })
             .catch(err => console.log(err));
-            cardIdentifier.cardElement.remove();
-          popupConfirm.close();
         });
         popupConfirm.open();
         popupConfirm.setEventListeners();
