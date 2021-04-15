@@ -9,9 +9,9 @@ export const validationConfig = {
 const profile = document.querySelector('.profile');
 export const buttonEditProfile = profile.querySelector('.profile__edit-button');
 export const buttonAddCard = profile.querySelector('.profile__add-button');
-export const nameProfileElement = profile.querySelector('.profile__name');
-export const metierProfileElement = profile.querySelector('.profile__metier');
-export const avatarProfileElement = profile.querySelector('.profile__avatar');
+// export const nameProfileElement = profile.querySelector('.profile__name');
+// export const metierProfileElement = profile.querySelector('.profile__metier');
+// export const avatarProfileElement = profile.querySelector('.profile__avatar');
 export const avatarEditElement = profile.querySelector('.profile__avatar-edit');
 
 const profilePopup = document.querySelector('.popup_type_profile');
@@ -25,6 +25,6 @@ export const addCardFormElement = addCardPopup.querySelector('.popup__form');
 const editAvatarPopup = document.querySelector('.popup_type_edit-avatar');
 export const editAvatarFormElement = editAvatarPopup.querySelector('.popup__form');
 
-export const confirmPopup = document.querySelector('.popup_type_confirm');
+// export const confirmPopup = document.querySelector('.popup_type_confirm');
 
-export const cardsContainer = document.querySelector('.elements');
+// export const cardsContainer = document.querySelector('.elements');

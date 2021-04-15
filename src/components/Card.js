@@ -1,12 +1,13 @@
 export default class Card {
-  constructor(data, selector, functionArgs) {
-    this._myId = 'a9f148dd3d5e2f4620ee62f5';
+  constructor(data, isOwner, selector, functionArgs) {
+    // this._myId = userId;
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._isLiked = this._likes.some(item => item._id === this._myId);
     this._owner = data.owner;
-    this._isOwner = data.owner._id === this._myId;
+    // this._isOwner = data.owner._id === this._myId;
+    this._isOwner = isOwner;
     this._cardId = data._id;
     this._selector = selector;
     this._handleCardClick = functionArgs.handleCardClick;
@@ -15,7 +16,7 @@ export default class Card {
     this._deleteLike = functionArgs.deleteLike;
   }
 
-  createCard() {
+  renderCard() {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.element__like-button');
     this._trashButton = this._element.querySelector('.element__trash');
@@ -65,7 +66,9 @@ export default class Card {
         this._likes = result.likes;
         this._elementLikeCounter.textContent = this._likes.length;
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   _handleDeleteLike() {
@@ -74,7 +77,9 @@ export default class Card {
         this._likes = result.likes;
         this._elementLikeCounter.textContent = this._likes.length;
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   _handleDeleteCard() {
