@@ -1,5 +1,4 @@
 .popup__container_type_confirm {
   padding: 36px;
   min-height: 181px;
-  min-width: calc(430/1280*100%);
 }

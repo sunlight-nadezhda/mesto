@@ -82,14 +82,12 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         items: initialCards,
         renderer: (cardInfo) => {
           const cardElement = createCard(cardInfo, userId);
-          elementsList.addItem(cardElement);
+          elementsList.addItem(cardElement, true);
         },
       },
       ".elements"
     );
     elementsList.renderItems();
-    console.log("userData: ", userData);
-    console.log("initialCards: ", initialCards);
   })
   .catch((err) => {
     console.log(err);
