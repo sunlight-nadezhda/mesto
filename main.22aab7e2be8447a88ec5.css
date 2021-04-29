@@ -30,11 +30,12 @@
 .popup_type_show-image{background-color:rgba(0,0,0,.9)}
 .popup__title{margin:0;color:#000;font-size:24px;line-height:1.20833;font-weight:900}@media (max-width:760px){.popup__title{font-size:18px;line-height:1.22222}}
 .popup__close-button{width:60px;height:60px;background-image:url(images/close-icon.a004a2d5d464d8ddbbb5.svg);background-repeat:no-repeat;background-size:cover;position:absolute;right:-50px;top:-50px;transition:opacity .5s ease-out}.popup__close-button:hover{opacity:.6;cursor:pointer}@media (max-width:760px){.popup__close-button{width:40px;height:40px;right:-2px;top:-53px}}
-.popup__container{max-width:430px;min-height:330px;background-color:#fff;box-shadow:0 0 25px rgba(0,0,0,.15);border-radius:10px;position:relative;padding:32px 36px 15px;box-sizing:border-box}@media (max-width:760px){.popup__container{max-width:calc(100% - 38px);padding:25px 22px}}
+.popup__container{max-width:430px;min-width:430px;min-height:330px;background-color:#fff;box-shadow:0 0 25px rgba(0,0,0,.15);border-radius:10px;position:relative;padding:32px 36px 15px;box-sizing:border-box}@media (max-width:760px){.popup__container{max-width:calc(100% - 38px);min-width:33.59375%;padding:25px 22px}}
 .popup__container_type_show-image{padding:0;max-width:-webkit-fit-content;max-width:-moz-fit-content;max-width:fit-content;background-color:transparent;color:#fff}
-.popup__container_type_confirm{padding:36px;min-height:181px;min-width:33.59375%}
+.popup__container_type_confirm{padding:36px;min-height:181px}
 .popup__container_type_edit-avatar{min-height:272px;padding:36px}
 .popup__form{margin-top:17px}@media (max-width:760px){.popup__form{margin-top:43px}}
+.popup__form_type_confirm{margin-top:0}@media (max-width:760px){.popup__form_type_confirm{margin-top:0}}
 .popup__form-field{margin-top:29px;display:inline-block;width:100%;position:relative}
 .popup__input{padding:0;width:100%;outline:none;border:none;border-bottom:1px solid rgba(0,0,0,.2);min-height:27px;font-size:14px;line-height:1.21429}.popup__input::-moz-placeholder{color:#c4c4c4;font-size:14px;line-height:1.21429;font-weight:400}.popup__input:-ms-input-placeholder{color:#c4c4c4;font-size:14px;line-height:1.21429;font-weight:400}.popup__input::placeholder{color:#c4c4c4;font-size:14px;line-height:1.21429;font-weight:400}
 .popup__input_type_error{border-bottom:1px solid red}
